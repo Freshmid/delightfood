@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'home2.dart';
+// import 'home.dart';
+import 'base.dart';
 import 'dart:async';
 
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
 }
+
 class _SplashState extends State<Splash> {
   @override
   void initState() {
@@ -45,7 +47,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void goHome() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => const BaseApp(),
       ),
     );
   }
@@ -92,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: MediaQuery.of(context).size.height * 0.01,
             ),
             const Text(
-              'You will win your enemy if you give them foods.\n- Sun Tzu',
+              "You will win your enemy if you know how to win their food recipes.\n- Sun Tzu",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

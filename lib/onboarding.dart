@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'home.dart';
-import 'base.dart';
+import 'signup.dart';
+import 'login.dart';
+
 import 'dart:async';
 
 class Splash extends StatefulWidget {
@@ -13,18 +14,18 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2),
-          ()=>Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder:
-                                                          (context) => 
-                                                          OnboardingScreen()
-                                                         )
-                                       )
-         );
+            ()=>Navigator.pushReplacement(context,
+            MaterialPageRoute(builder:
+                (context) =>
+                OnboardingScreen()
+            )
+        )
+    );
   }
   @override
   Widget build(BuildContext context) {
     return Container(
-      
+
       color: Colors.white,
       // child:FlutterLogo(size:MediaQuery.of(context).size.height)
       child: const Image(image: AssetImage("assets/logos/logo_nobg.png")),
@@ -44,10 +45,18 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  void goHome() {
+  void goSignUp() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const BaseApp(),
+        builder: (context) => SignUp(),
+      ),
+    );
+  }
+
+  void goLogin() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Login(),
       ),
     );
   }
@@ -132,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     onPressed: () {
-                      goHome();
+                      goSignUp();
                     },
                     child: const Text('Sign Up'),
                   ),
@@ -168,14 +177,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     onPressed: () {
-                      goHome();
+                      goLogin();
                     },
-                    child: const Text('Log In'),
+                    child: const Text('Login'),
                   ),
                 ],
               ),
             ),
-          ],
+          ]
         ),
       ),
     );

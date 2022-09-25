@@ -14,7 +14,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
       children: [
         Container(
           width: (MediaQuery.of(context).size.width/1.35),
-          height: (MediaQuery.of(context).size.height/18),
+          height: 45,
           decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(45)
           ),
@@ -39,7 +39,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
 
         Container(
           child: Ink(
-            height: (MediaQuery.of(context).size.height/18),
+            height: 45,
             decoration: const ShapeDecoration(
               // color: Colors.white24,
               color: Colors.white,
@@ -47,7 +47,7 @@ class _BaseAppBarState extends State<BaseAppBar> {
             ),
             child: IconButton(
               icon: const Icon(Icons.person),
-              iconSize: (MediaQuery.of(context).size.height/32),
+              iconSize: 30,
               color: Colors.black,
               onPressed: () {},
             ),

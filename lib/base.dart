@@ -38,7 +38,7 @@ class _BaseAppState extends State<BaseApp> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFff9934),
-        toolbarHeight: (MediaQuery.of(context).size.height/12),
+        toolbarHeight: 60,
         automaticallyImplyLeading: false,
           // The search area here
         title: Center(

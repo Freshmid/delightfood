@@ -189,6 +189,67 @@ class _SignUpScreen extends State<SignUp> {
     );
   }
 
+  Widget inputConfirmPassword() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Confirm Password",
+          style: TextStyle(
+              fontSize: 16,
+              color: Color(0xFFE7872C),
+              fontWeight: FontWeight.bold
+          ),
+        ),
+        SizedBox(height: 10),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 6,
+                    offset: Offset(0,2)
+                )
+              ]
+          ),
+          height: 60,
+          child: TextField(
+            obscureText: _isHide,
+            style: TextStyle(
+                color: Colors.black87
+            ),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 14),
+                prefixIcon: Icon(
+                    Icons.lock,
+                    color: Color(0xFFE7872C)
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isHide ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.black26,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isHide = !_isHide;
+                    });
+                  },
+                ),
+                hintText: 'Confirm Password',
+                hintStyle: TextStyle(
+                    color: Colors.black38
+                )
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   Widget signUpButton() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25),
@@ -289,6 +350,8 @@ class _SignUpScreen extends State<SignUp> {
                       inputEmail(),
                       SizedBox(height: 20),
                       inputPassword(),
+                      SizedBox(height: 20),
+                      inputConfirmPassword(),
                       signUpButton(),
                       haveAccount()
                     ],

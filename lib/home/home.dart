@@ -214,10 +214,28 @@ class _HomePageState extends State<HomePage> {
                     ),
                     
                     Container(
+                      height: 180,
                       width: MediaQuery.of(context).size.width/2.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
                       ),
                       child: Column(
                         children: [
@@ -238,31 +256,34 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 height: 10,
                               ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
                                 decoration: const ShapeDecoration(
                                   // color: Colors.white24,
                                   color: Colors.brown,
                                   shape: CircleBorder(),
                                 ),
                                 child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                   icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
+                                  iconSize: 25,
                                   color: Colors.white,
                                   onPressed: () {},
                                 ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
                               ),
                             ],
                           ),
@@ -271,20 +292,35 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-
-                
                 Column(
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width/2,
                     ),
-
+                    
                     Container(
-                      width: MediaQuery.of(context).size.width/2.2,
+                      height: 180,
+                      width: MediaQuery.of(context).size.width/2.3,
                       decoration: BoxDecoration(
-                        
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
                       ),
                       child: Column(
                         children: [
@@ -305,37 +341,224 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 height: 10,
                               ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
                                 decoration: const ShapeDecoration(
                                   // color: Colors.white24,
                                   color: Colors.brown,
                                   shape: CircleBorder(),
                                 ),
                                 child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                   icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
+                                  iconSize: 25,
                                   color: Colors.white,
                                   onPressed: () {},
                                 ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
                               ),
                             ],
                           ),
                         ],
                       ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          Container(
+            height: 16,
+          ),
+
+
+
+// ------------------------------------------------------------------------
+          Container(
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width/2,
                     ),
+                    
+                    Container(
+                      height: 180,
+                      width: MediaQuery.of(context).size.width/2.3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 100,
+                            // color: Colors.brown,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: const DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/images/img-easy-teriyaki.webp")
+                              )  
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  // color: Colors.white24,
+                                  color: Colors.brown,
+                                  shape: CircleBorder(),
+                                ),
+                                child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  icon: Icon(Icons.person),
+                                  iconSize: 25,
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width/2,
+                    ),
+                    
+                    Container(
+                      height: 180,
+                      width: MediaQuery.of(context).size.width/2.3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 100,
+                            // color: Colors.brown,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              image: const DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage("assets/images/img-easy-teriyaki.webp")
+                              )  
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 10,
+                              ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  // color: Colors.white24,
+                                  color: Colors.brown,
+                                  shape: CircleBorder(),
+                                ),
+                                child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  icon: Icon(Icons.person),
+                                  iconSize: 25,
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ],
@@ -356,11 +579,28 @@ class _HomePageState extends State<HomePage> {
                     ),
                     
                     Container(
+                      height: 180,
                       width: MediaQuery.of(context).size.width/2.3,
                       decoration: BoxDecoration(
-                        
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
                       ),
                       child: Column(
                         children: [
@@ -381,31 +621,34 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 height: 10,
                               ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
                                 decoration: const ShapeDecoration(
                                   // color: Colors.white24,
                                   color: Colors.brown,
                                   shape: CircleBorder(),
                                 ),
                                 child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                   icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
+                                  iconSize: 25,
                                   color: Colors.white,
                                   onPressed: () {},
                                 ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
                               ),
                             ],
                           ),
@@ -414,82 +657,6 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                
-                Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width/2,
-                    ),
-
-                    Container(
-                      width: MediaQuery.of(context).size.width/2.2,
-                      decoration: BoxDecoration(
-                        
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.black12,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 100,
-                            // color: Colors.brown,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/img-easy-teriyaki.webp")
-                              )  
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 10,
-                              ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
-                                decoration: const ShapeDecoration(
-                                  // color: Colors.white24,
-                                  color: Colors.brown,
-                                  shape: CircleBorder(),
-                                ),
-                                child: IconButton(
-                                  icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 16,
-          ),
-
-          Container(
-            child: Row(
-              children: [
                 Column(
                   children: [
                     Container(
@@ -497,11 +664,28 @@ class _HomePageState extends State<HomePage> {
                     ),
                     
                     Container(
+                      height: 180,
                       width: MediaQuery.of(context).size.width/2.3,
                       decoration: BoxDecoration(
-                        
                         borderRadius: BorderRadius.circular(8),
                         color: Colors.black12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xFFC2C2C2),
+                            offset: const Offset(
+                              4.0,
+                              3.0,
+                            ),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ), //BoxShadow
+                          BoxShadow(
+                            color: Colors.white,
+                            offset: const Offset(0.0, 0.0),
+                            blurRadius: 0.0,
+                            spreadRadius: 0.0,
+                          ), //BoxShadow
+                        ],
                       ),
                       child: Column(
                         children: [
@@ -522,31 +706,34 @@ class _HomePageState extends State<HomePage> {
                               Container(
                                 height: 10,
                               ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                width: MediaQuery.of(context).size.width/2.3,
+                                child: Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                  overflow: TextOverflow.ellipsis,
+                                )
+                              ),
+                              
+                              Container(
+                                height: 10,
+                              ),
+
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                height: 40,
                                 decoration: const ShapeDecoration(
                                   // color: Colors.white24,
                                   color: Colors.brown,
                                   shape: CircleBorder(),
                                 ),
                                 child: IconButton(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                   icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
+                                  iconSize: 25,
                                   color: Colors.white,
                                   onPressed: () {},
                                 ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
                               ),
                             ],
                           ),
@@ -555,75 +742,10 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                
-                Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width/2,
-                    ),
-
-                    Container(
-                      width: MediaQuery.of(context).size.width/2.2,
-                      decoration: BoxDecoration(
-                        
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.black12,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 100,
-                            // color: Colors.brown,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/images/img-easy-teriyaki.webp")
-                              )  
-                            ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 10,
-                              ),
-                              Ink(
-                                height: (MediaQuery.of(context).size.height/18),
-                                decoration: const ShapeDecoration(
-                                  // color: Colors.white24,
-                                  color: Colors.brown,
-                                  shape: CircleBorder(),
-                                ),
-                                child: IconButton(
-                                  icon: Icon(Icons.person),
-                                  iconSize: (MediaQuery.of(context).size.height/32),
-                                  color: Colors.white,
-                                  onPressed: () {},
-                                ),
-                              ),
-
-                              Container(
-                                height: 10,
-                              ),
-
-                              const SizedBox(
-                                width: 100,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
+
           Container(
             height: 20,
           ),

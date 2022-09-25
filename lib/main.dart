@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'onboarding/onboarding.dart';
 
 void main() {
-  // add these lines
   WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

@@ -74,7 +74,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(32.5),
-        child: Column(
+        child: ListView(
+        scrollDirection: Axis.vertical,
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
@@ -115,74 +116,54 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: MediaQuery.of(context).size.height * 0.1,
             ),
 
-            ClipRRect(
-              borderRadius: BorderRadius.circular(26.5),
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFFE7872C),
-                            Color(0xFFff9934),
-                            Color(0xFFFDAF61),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
 
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(300, 50),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.all(16.0),
-                      textStyle: const TextStyle(fontSize: 18),
-                    ),
-                    onPressed: () {
-                      goSignUp();
-                    },
-                    child: const Text('Sign Up'),
+
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                  elevation: 5,
+                  padding: EdgeInsets.all(15),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
                   ),
-                ],
+                  backgroundColor: Color(0xFFff9934),
               ),
+              onPressed: () {
+                goSignUp();
+              },
+              child: Text(
+                "SIGN UP",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                ),
+              )
             ),
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.005,
+              height: 10,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(26.5),
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFFD0D0D0),
-                            Color(0xFFD0D0D0),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
 
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(300, 50),
-                      foregroundColor: Colors.black54,
-                      padding: const EdgeInsets.all(16.0),
-                      textStyle: const TextStyle(fontSize: 18),
-                    ),
-                    onPressed: () {
-                      goLogin();
-                    },
-                    child: const Text('Login'),
+            ElevatedButton(
+              style: TextButton.styleFrom(
+                  elevation: 5,
+                  padding: EdgeInsets.all(15),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)
                   ),
-                ],
+                  backgroundColor: Color.fromARGB(255, 206, 206, 206),
               ),
+              onPressed: () {
+                goSignUp();
+              },
+              child: Text(
+                "Login",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                ),
+              )
             ),
           ]
         ),

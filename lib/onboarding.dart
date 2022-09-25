@@ -14,18 +14,18 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) =>
-                OnboardingScreen()
-            )
-        )
-    );
+          ()=>Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder:
+                                                          (context) => 
+                                                          OnboardingScreen()
+                                                         )
+                                       )
+         );
   }
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      
       color: Colors.white,
       // child:FlutterLogo(size:MediaQuery.of(context).size.height)
       child: const Image(image: AssetImage("assets/logos/logo_nobg.png")),
@@ -52,7 +52,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
-
   void goLogin() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -60,6 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     );
   }
+
 
 
   @override

@@ -1,8 +1,8 @@
-import 'package:delightfood/profilebar.dart';
+import 'package:delightfood/profile/profilebar.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import '../home/home.dart';
 import 'appbar.dart';
-import 'profile.dart';
+import '../profile/profile.dart';
 
 // import 'package:delightfood/search.dart';
 

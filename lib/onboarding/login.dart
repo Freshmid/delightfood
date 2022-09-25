@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'base.dart';
-import 'login.dart';
+import '../base_app/base.dart';
+import 'signup.dart';
 
-class SignUp extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _SignUpScreen createState() => _SignUpScreen();
+  _LoginScreen createState() => _LoginScreen();
 }
 
-class _SignUpScreen extends State<SignUp> {
+class _LoginScreen extends State<Login> {
+  bool _isRemember = false;
 
   bool _isHide = true;
 
@@ -20,61 +21,11 @@ class _SignUpScreen extends State<SignUp> {
     );
   }
 
-  void goLogin() {
+  void goSignUp() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Login(),
+        builder: (context) => SignUp(),
       ),
-    );
-  }
-
-  Widget inputFullname() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Fullname",
-          style: TextStyle(
-              fontSize: 16,
-              color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        SizedBox(height: 10),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
-          height: 60,
-          child: TextField(
-            keyboardType: TextInputType.name,
-            style: TextStyle(
-                color: Colors.black87
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.people,
-                    color: Color(0xFFE7872C)
-                ),
-                hintText: 'Fullname',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
-          ),
-        )
-      ],
     );
   }
 
@@ -189,56 +140,101 @@ class _SignUpScreen extends State<SignUp> {
     );
   }
 
-  Widget signUpButton() {
+  Widget forgetPassword() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25),
-      width: double.infinity,
-      child: ElevatedButton(
-          style: TextButton.styleFrom(
-              elevation: 5,
-              padding: EdgeInsets.all(15),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              backgroundColor: Color(0xFFE7872C)
+      alignment: Alignment.centerRight,
+      child: TextButton(
+        onPressed: () => print("Forget Password"),
+        child: Text(
+          "Forget Password?",
+          style: TextStyle(
+              color: Color(0xFFE7872C),
+              fontWeight: FontWeight.bold
           ),
-          onPressed: () {
-            goHome();
-          },
-          child: Text(
-            "SIGN UP",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-            ),
-          )
+        ),
       ),
     );
   }
 
-  Widget haveAccount() {
+  Widget rememberMe() {
+    return Container(
+      height: 20,
+      child: Row(
+        children: [
+          Theme(
+              data: ThemeData(unselectedWidgetColor: Colors.black26),
+              child: Checkbox(
+                value: _isRemember,
+                checkColor: Colors.white,
+                activeColor: Color(0xFFE7872C),
+                onChanged: (value) {
+                  setState(() {
+                    _isRemember = value!;
+                  });
+                },
+              )
+          ),
+          Text(
+            "Remember Me",
+            style: TextStyle(
+                color: Color(0xFFE7872C)
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget loginButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: TextButton.styleFrom(
+          elevation: 5,
+          padding: EdgeInsets.all(15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+          ),
+          backgroundColor: Color(0xFFE7872C)
+        ),
+        onPressed: () {
+          goHome();
+        },
+        child: Text(
+          "LOGIN",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+          ),
+        )
+      ),
+    );
+  }
+
+  Widget dontHaveAccount() {
     return GestureDetector(
       onTap: () {
-        goLogin();
+        goSignUp();
       },
       child: RichText(
         text: TextSpan(
-            children: [
-              TextSpan(
-                  text: 'Already have an account? ',
-                  style: TextStyle(
-                      color: Color(0xFFE7872C)
-                  )
-              ),
-              TextSpan(
-                  text: 'Login',
-                  style: TextStyle(
-                      color: Color(0xFFE7872C),
-                      fontWeight: FontWeight.bold
-                  )
+          children: [
+            TextSpan(
+              text: 'Don\'t have any account? ',
+              style: TextStyle(
+                  color: Color(0xFFE7872C)
               )
-            ]
+            ),
+            TextSpan(
+              text: 'Sign Up',
+              style: TextStyle(
+                  color: Color(0xFFE7872C),
+                  fontWeight: FontWeight.bold
+              )
+            )
+          ]
         ),
       ),
     );
@@ -255,14 +251,12 @@ class _SignUpScreen extends State<SignUp> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.white
-                ),
+                color: Colors.white,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 120
+                    horizontal: 25,
+                    vertical: 120
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -271,12 +265,12 @@ class _SignUpScreen extends State<SignUp> {
                         height: 100,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/logos/logo_nobg.png")
+                            image: AssetImage("assets/logos/logo_nobg.png")
                           ),
                         ),
                       ),
                       Text(
-                        'Sign Up',
+                        'Login',
                         style: TextStyle(
                             color: Color(0xFFE7872C),
                             fontSize: 30,
@@ -284,13 +278,13 @@ class _SignUpScreen extends State<SignUp> {
                         ),
                       ),
                       SizedBox(height: 50),
-                      inputFullname(),
-                      SizedBox(height: 20),
                       inputEmail(),
                       SizedBox(height: 20),
                       inputPassword(),
-                      signUpButton(),
-                      haveAccount()
+                      forgetPassword(),
+                      rememberMe(),
+                      loginButton(),
+                      dontHaveAccount()
                     ],
                   ),
                 ),

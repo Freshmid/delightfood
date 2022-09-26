@@ -154,7 +154,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   backgroundColor: Color.fromARGB(255, 206, 206, 206),
               ),
               onPressed: () {
-                goSignUp();
+                goLogin();
               },
               child: Text(
                 "Login",

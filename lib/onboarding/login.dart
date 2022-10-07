@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../base_app/base.dart';
 import 'signup.dart';
+import 'fpemail.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -25,6 +26,14 @@ class _LoginScreen extends State<Login> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SignUp(),
+      ),
+    );
+  }
+
+  void goFpEmail() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => FpEmail(),
       ),
     );
   }
@@ -144,7 +153,9 @@ class _LoginScreen extends State<Login> {
     return Container(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => print("Forget Password"),
+        onPressed: () {
+          goFpEmail();
+        },
         child: Text(
           "Forget Password?",
           style: TextStyle(

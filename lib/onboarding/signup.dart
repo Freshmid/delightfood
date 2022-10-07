@@ -11,6 +11,7 @@ class SignUp extends StatefulWidget {
 class _SignUpScreen extends State<SignUp> {
 
   bool _isHide = true;
+  bool _isHide2 = true;
 
   void goHome() {
     Navigator.of(context).push(
@@ -217,7 +218,7 @@ class _SignUpScreen extends State<SignUp> {
           ),
           height: 60,
           child: TextField(
-            obscureText: _isHide,
+            obscureText: _isHide2,
             style: TextStyle(
                 color: Colors.black87
             ),
@@ -230,12 +231,12 @@ class _SignUpScreen extends State<SignUp> {
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isHide ? Icons.visibility : Icons.visibility_off,
+                    _isHide2 ? Icons.visibility : Icons.visibility_off,
                     color: Colors.black26,
                   ),
                   onPressed: () {
                     setState(() {
-                      _isHide = !_isHide;
+                      _isHide2 = !_isHide2;
                     });
                   },
                 ),

@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 
 class Setprofile extends StatefulWidget {
-  const Setprofile({ Key? key }) : super(key: key);
+  const Setprofile({Key? key}) : super(key: key);
 
   @override
   _setprofilScreen createState() => _setprofilScreen();
 }
 
 class _setprofilScreen extends State<Setprofile> {
-
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: AssetImage('assets/images/img-onboarding.png'),
-                )
-              ],
-            )),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 50.0,
+              backgroundImage: AssetImage('assets/images/img-onboarding.png'),
+            )
+          ],
+        )),
       ),
     );
   }
@@ -36,8 +35,7 @@ class _setprofilScreen extends State<Setprofile> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -47,30 +45,18 @@ class _setprofilScreen extends State<Setprofile> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             keyboardType: TextInputType.name,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.people,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.people, color: Color(0xFFE7872C)),
                 hintText: 'Fullname',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -86,8 +72,7 @@ class _setprofilScreen extends State<Setprofile> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -97,30 +82,18 @@ class _setprofilScreen extends State<Setprofile> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             keyboardType: TextInputType.name,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.email,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.email, color: Color(0xFFE7872C)),
                 hintText: 'Email',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -136,8 +109,7 @@ class _setprofilScreen extends State<Setprofile> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -147,30 +119,18 @@ class _setprofilScreen extends State<Setprofile> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             keyboardType: TextInputType.datetime,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.date_range,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.date_range, color: Color(0xFFE7872C)),
                 hintText: 'Tanggal Lahir',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -186,8 +146,7 @@ class _setprofilScreen extends State<Setprofile> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -197,36 +156,21 @@ class _setprofilScreen extends State<Setprofile> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             keyboardType: TextInputType.name,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.email,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.email, color: Color(0xFFE7872C)),
                 hintText: 'Lokasi',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
     );
   }
-
-
-
-
+}

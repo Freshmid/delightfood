@@ -18,19 +18,6 @@ class _KategoriScreen extends State<Kategori> {
     );
   }
 
-  Widget Cemilan() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              (goFpsearch());
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.phone, size: 30),
-            label: Text('Cemiilan')));
-  }
-
   Widget Kue() {
     return Container(
         height: 100,

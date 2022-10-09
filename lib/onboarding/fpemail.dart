@@ -105,6 +105,7 @@ class _FpEmailScreen extends State<FpEmail> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../base_app/base.dart';
 
 class Setprofile extends StatefulWidget {
   const Setprofile({Key? key}) : super(key: key);
@@ -8,20 +9,79 @@ class Setprofile extends StatefulWidget {
 }
 
 class _setprofilScreen extends State<Setprofile> {
+  void backtoBase() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => BaseApp(),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.symmetric(vertical: 60, horizontal: 20),
           children: [
-            CircleAvatar(
-              radius: 50.0,
-              backgroundImage: AssetImage('assets/images/img-onboarding.png'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage:
+                      AssetImage('assets/images/img-onboarding.png'),
+                )
+              ],
+            ),
+
+            Container(
+              height: 20,
+            ),
+
+            inputemail(),
+
+            Container(
+              height: 20,
+            ),
+
+            inputnama(),
+
+            Container(
+              height: 20,
+            ),
+
+            tanggallahir(),
+
+            Container(
+              height: 20,
+            ),
+            // lokasi(),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 40,horizontal: 0),
+              child: ElevatedButton(
+                  style: TextButton.styleFrom(
+                    elevation: 5,
+                    padding: EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    backgroundColor: Color(0xFFff9934),
+                  ),
+                  onPressed: () {
+                    backtoBase();
+                  },
+                  child: Text(
+                    "Selesai",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
             )
           ],
-        )),
+        ),
       ),
     );
   }

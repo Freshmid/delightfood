@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'custom_fonts.dart';
-import 'items.dart';
-
+import '../items.dart';
 
 class InspiringItems extends StatefulWidget {
   const InspiringItems({Key? key}) : super(key: key);
@@ -11,35 +10,64 @@ class InspiringItems extends StatefulWidget {
 }
 
 class _InspiringItemsState extends State<InspiringItems> {
-  final dataCar = <Widget>[];
-  _InspiringItemsState() {
-    for (var i = 0; i < Recipes.recipe.length; i++) {
-      dataCar.add(Container(
-        padding: EdgeInsets.all(4.0),
-        width: 200,
-        height: 200,
+  // final dataCar = <Widget>[];
+  // _InspiringItemsState() {
+  //   for (var i = 0; i < recipesAll.recipe.length; i++) {
+  //     dataCar.add(Container(
+  //       padding: EdgeInsets.all(4.0),
+  //       width: 200,
+  //       height: 200,
+  //       decoration: BoxDecoration(
+  //         borderRadius: BorderRadius.circular(8),
+  //       ),
+  //       child: GestureDetector(
+  //         // onTap: ,
+  //         child: Image.asset(
+  //           recipesAll.recipe[i].path,
+  //           fit: BoxFit.cover,
+  //         ),
+  //       ),
+  //     ));
+  //   }
+  // }
+
+  Widget components(BuildContext context, i) {
+    return GestureDetector(
+      // onTap: ,
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(recipesAll.recipe[i].path), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: GestureDetector(
-          // onTap: ,
-          child: Image.asset(
-            Recipes.recipe[i].path,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ));
-    }
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return ListView.builder(
       scrollDirection: Axis.horizontal,
-      children: dataCar
+      padding: const EdgeInsets.all(8),
+      itemCount: recipesAll.recipe.length,
+      itemBuilder: (context, i) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: components(context, i),
+      ),
     );
   }
 }
+
+// @override
+// Widget build(BuildContext context) {
+//   return ListView(
+//     scrollDirection: Axis.horizontal,
+//     children: dataCar
+//   );
+// }
+// }
 
 class RecommendedItems extends StatefulWidget {
   const RecommendedItems({Key? key}) : super(key: key);
@@ -76,22 +104,19 @@ class _RecommendedItemsState extends State<RecommendedItems> {
       ),
       child: Column(
         children: [
-          Container(
+          Center(
             child: Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height <= 720
-                      ? MediaQuery.of(context).size.height / 2.5
-                      : MediaQuery.of(context).size.height / 5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: GestureDetector(
-                    // onTap: ,
-                    child: Image.asset(
-                      Recipes.recipe[i].path,
-                      fit: BoxFit.cover,
+                GestureDetector(
+                  // onTap: ,
+                  child: Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height <= 720
+                        ? MediaQuery.of(context).size.height / 2.5
+                        : MediaQuery.of(context).size.height / 6,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(image: AssetImage(recipesAll.recipe[i].path),fit: BoxFit.cover)
                     ),
                   ),
                 ),
@@ -115,7 +140,7 @@ class _RecommendedItemsState extends State<RecommendedItems> {
                         iconSize: 25,
                         color: Colors.white,
                         onPressed: () {
-                          print(Recipes.recipe[0].title);
+                          print(recipesAll.recipe[0].title);
                         },
                       ),
                     ),
@@ -126,7 +151,7 @@ class _RecommendedItemsState extends State<RecommendedItems> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       width: MediaQuery.of(context).size.width / 2.3,
                       child: Text(
-                        Recipes.recipe[i].title,
+                        recipesAll.recipe[i].title,
                         style: BasicHeading,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -144,13 +169,12 @@ class _RecommendedItemsState extends State<RecommendedItems> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         physics: ScrollPhysics(),
         shrinkWrap: true,
-        itemCount: Recipes.recipe.length,
+        itemCount: recipesAll.recipe.length,
         itemBuilder: (context, i) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: components(context, i),
@@ -158,6 +182,6 @@ class _RecommendedItemsState extends State<RecommendedItems> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio:
-                MediaQuery.of(context).size.height <= 720 ? 1.4 : 0.6));
+                MediaQuery.of(context).size.height <= 720 ? 1.4 : 0.7));
   }
 }

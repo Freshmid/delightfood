@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'search.dart';
+import 'search_builder.dart';
 
 class Kategori extends StatefulWidget {
   const Kategori({Key? key}) : super(key: key);
@@ -16,70 +17,70 @@ class _KategoriScreen extends State<Kategori> {
     );
   }
 
-  Widget Cemilan() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              (goFpsearch());
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.phone, size: 30),
-            label: Text('Cemiilan')));
-  }
+  // Widget Cemilan() {
+  //   return Container(
+  //       height: 100,
+  //       width: double.infinity,
+  //       child: ElevatedButton(
+  //           onPressed: () {
+  //             (goFpsearch());
+  //           },
+  //           style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+  //           child: Text("Camilan"),
+  //           ));
+  // }
 
-  Widget Kue() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              goFpsearch();
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.mail, size: 30),
-            label: Text('kue')));
-  }
+  // Widget Kue() {
+  //   return Container(
+  //       height: 100,
+  //       width: double.infinity,
+  //       child: ElevatedButton(
+  //           onPressed: () {
+  //             goFpsearch();
+  //           },
+  //           style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+  //           child: Text("Kue"),
+  //           ));
+  // }
 
-  Widget Minuman() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              goFpsearch();
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.mail, size: 30),
-            label: Text('Minuman')));
-  }
+  // Widget Minuman() {
+  //   return Container(
+  //       height: 100,
+  //       width: double.infinity,
+  //       child: ElevatedButton(
+  //           onPressed: () {
+  //             goFpsearch();
+  //           },
+  //           style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+  //           child: Text("Minuman"),
+  //           ));
+  // }
 
-  Widget Sayuran() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              goFpsearch();
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.mail, size: 30),
-            label: Text('Sayuran')));
-  }
+  // Widget Sayuran() {
+  //   return Container(
+  //       height: 100,
+  //       width: double.infinity,
+  //       child: ElevatedButton.icon(
+  //           onPressed: () {
+  //             goFpsearch();
+  //           },
+  //           style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+  //           icon: Icon(Icons.mail, size: 30),
+  //           label: Text('Sayuran')));
+  // }
 
-  Widget Seafood() {
-    return Container(
-        height: 100,
-        width: double.infinity,
-        child: ElevatedButton.icon(
-            onPressed: () {
-              goFpsearch();
-            },
-            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
-            icon: Icon(Icons.mail, size: 30),
-            label: Text('Seafood')));
-  }
+  // Widget Seafood() {
+  //   return Container(
+  //       height: 100,
+  //       width: double.infinity,
+  //       child: ElevatedButton.icon(
+  //           onPressed: () {
+  //             goFpsearch();
+  //           },
+  //           style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+  //           icon: Icon(Icons.mail, size: 30),
+  //           label: Text('Seafood')));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class _KategoriScreen extends State<Kategori> {
             decoration: BoxDecoration(color: Colors.white),
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,16 +113,21 @@ class _KategoriScreen extends State<Kategori> {
                     style: TextStyle(color: Colors.black38, fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 50),
-                  Cemilan(),
-                  SizedBox(height: 25),
-                  Kue(),
-                  SizedBox(height: 20),
-                  Minuman(),
-                  SizedBox(height: 15),
-                  Sayuran(),
-                  SizedBox(height: 10),
-                  Seafood(),
+
+                  Container(
+                    child: const CategoryItems(),
+                  )
+
+                  // SizedBox(height: 50),
+                  // Cemilan(),
+                  // SizedBox(height: 25),
+                  // Kue(),
+                  // SizedBox(height: 20),
+                  // Minuman(),
+                  // SizedBox(height: 15),
+                  // Sayuran(),
+                  // SizedBox(height: 10),
+                  // Seafood(),
                 ],
               ),
             ),

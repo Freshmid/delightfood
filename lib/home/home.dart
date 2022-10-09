@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'grid.dart';
+import 'home_builder.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -69,9 +69,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Container(
-            padding: const EdgeInsets.all(8.0),
-            width: double.infinity,
-            height: MediaQuery.of(context).size.width/3,
+            width: MediaQuery.of(context).size.width/2,
+            height: MediaQuery.of(context).size.width/2.5,
             child: InspiringItems(),
             ),
         // Container(

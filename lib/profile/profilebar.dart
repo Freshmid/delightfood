@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'setprofil.dart';
 
 class ProfileBar extends StatefulWidget {
   const ProfileBar({ Key? key }) : super(key: key);
@@ -10,7 +11,15 @@ class ProfileBar extends StatefulWidget {
 class _ProfileBarState extends State<ProfileBar> {
   String user_name = "NirvanaXDD";
   String user_email = "@nirvanadd";
-  
+
+  void settingProfile() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Setprofile(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -85,7 +94,7 @@ class _ProfileBarState extends State<ProfileBar> {
             icon: const Icon(Icons.settings),
             iconSize: (MediaQuery.of(context).size.height/32),
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {settingProfile();},
           ),
         ),
       ],

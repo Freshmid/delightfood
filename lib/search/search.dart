@@ -9,6 +9,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool _isHide = true;
+  bool _isHide2 = true;
+
+  void gosearch() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SearchPage(),
+      ),
+    );
+  }
+
   void updatelist(String Value) {}
 
   @override

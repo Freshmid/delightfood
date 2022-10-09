@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../home/home.dart';
 import 'appbar.dart';
 import '../profile/profile.dart';
+import '../search/kategori.dart';
 
 // import 'package:delightfood/search.dart';
 
@@ -19,7 +20,7 @@ class _BaseAppState extends State<BaseApp> {
   static const List<Widget> _widgetOptions = <Widget>[  
     HomePage(),
     HomePage(),
-    HomePage(),
+    Kategori(),
     Profile(),
     BaseAppBar(),
     BaseAppBar(),

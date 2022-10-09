@@ -70,7 +70,6 @@ class _BaseAppState extends State<BaseApp> {
           ),
         ],
         currentIndex: _selectedIndex,
-        // type: BottomNavigationBarType.shifting,  
         selectedItemColor: const Color(0xFFF6925C),
         onTap: _onItemTapped,
         backgroundColor: const Color(0xFFFFF5F1),

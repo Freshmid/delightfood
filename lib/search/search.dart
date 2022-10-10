@@ -22,21 +22,6 @@ class _SearchPageState extends State<SearchPage> {
 
   void updatelist(String Value) {}
 
-  Widget resep_1() {
-    return Container(
-      padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
-      child: Text(
-        "Cemilan",
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w900,
-          color: Color.fromARGB(255, 92, 92, 92),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -10,7 +10,7 @@ class CategoryItems extends StatefulWidget {
 }
 
 class _CategoryItemsState extends State<CategoryItems> {
-  goFpsearch() {
+  searchCategory() {
     Navigator.of(context).push(
       MaterialPageRoute(builder: ((context) => SearchPage())),
     );
@@ -26,7 +26,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         ),
         child: ElevatedButton(
           onPressed: () {
-            goFpsearch();
+            searchCategory();
           },
           style: ElevatedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Color(0)),
           child: Text(recipesAll.recipe[i].category, style: TextStyle(fontSize: 24),),

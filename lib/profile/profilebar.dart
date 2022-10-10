@@ -27,7 +27,7 @@ class _ProfileBarState extends State<ProfileBar> {
         Container(
           alignment: Alignment.centerLeft,
           child: Ink(
-            height: (MediaQuery.of(context).size.height/18),
+            height: 45,
             decoration: const ShapeDecoration(
               // color: Colors.white24,
               color: Colors.white,
@@ -35,7 +35,7 @@ class _ProfileBarState extends State<ProfileBar> {
             ),
             child: IconButton(
               icon: const Icon(Icons.person),
-              iconSize: (MediaQuery.of(context).size.height/32),
+              iconSize: 30,
               color: Colors.black,
               onPressed: () {},
             ),
@@ -58,14 +58,14 @@ class _ProfileBarState extends State<ProfileBar> {
                   user_name,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.height/40,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold
                     // fontSize: 24,
                   ),
                 ),
               ),
 
-              Container(height: 2,),
+              // Container(height: 2,),
               
               Container(
                 alignment: Alignment.centerLeft,
@@ -73,7 +73,7 @@ class _ProfileBarState extends State<ProfileBar> {
                   user_email,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.height/60,
+                    fontSize: 14,
                     // fontSize: 24,
                   ),
                 ),
@@ -85,14 +85,13 @@ class _ProfileBarState extends State<ProfileBar> {
           ),
         ),
 
-        Container(
-          width: (MediaQuery.of(context).size.width/12),
-        ),
 
         Container(
+          width: MediaQuery.of(context).size.width/3 - 35,
           child: IconButton(
+            alignment: Alignment.centerRight,
             icon: const Icon(Icons.settings),
-            iconSize: (MediaQuery.of(context).size.height/32),
+            iconSize: 35,
             color: Colors.white,
             onPressed: () {settingProfile();},
           ),

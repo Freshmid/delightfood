@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'custom_fonts.dart';
 import '../items.dart';
+import '../description/resipes_description.dart';
 
 class InspiringItems extends StatefulWidget {
   const InspiringItems({Key? key}) : super(key: key);
@@ -77,6 +78,14 @@ class RecommendedItems extends StatefulWidget {
 }
 
 class _RecommendedItemsState extends State<RecommendedItems> {
+
+  void readDescription() {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => RecipesDescription())
+    );
+  }
+
+
   Widget components(BuildContext context, i) {
     return Container(
       // height: MediaQuery.of(context).size.width/2.3,
@@ -108,7 +117,7 @@ class _RecommendedItemsState extends State<RecommendedItems> {
             child: Column(
               children: [
                 GestureDetector(
-                  // onTap: ,
+                  onTap: readDescription,
                   child: Container(
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height <= 720

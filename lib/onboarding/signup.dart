@@ -317,6 +317,7 @@ class _SignUpScreen extends State<SignUp> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                     color: Colors.white
                 ),

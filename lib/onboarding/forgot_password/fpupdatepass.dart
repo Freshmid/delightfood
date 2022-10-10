@@ -47,6 +47,9 @@ class _FpUpdatePass extends State<FpUpdatePass> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
@@ -56,14 +59,15 @@ class _FpUpdatePass extends State<FpUpdatePass> {
                   Container(
                     height: double.infinity,
                     width: double.infinity,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.white
                     ),
                     child: SingleChildScrollView(
                       physics: AlwaysScrollableScrollPhysics(),
                       padding: EdgeInsets.symmetric(
-                          horizontal: 25,
-                          vertical: 120
+                          horizontal: screenWidth * 0.05,
+                          vertical: screenHeight * 0.1
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

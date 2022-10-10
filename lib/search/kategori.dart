@@ -17,6 +17,7 @@ class _KategoriScreen extends State<Kategori> {
     );
   }
 
+<<<<<<< HEAD
   // Widget Cemilan() {
   //   return Container(
   //       height: 100,
@@ -42,6 +43,20 @@ class _KategoriScreen extends State<Kategori> {
   //           child: Text("Kue"),
   //           ));
   // }
+=======
+  Widget Kue() {
+    return Container(
+        height: 100,
+        width: double.infinity,
+        child: ElevatedButton.icon(
+            onPressed: () {
+              goFpsearch();
+            },
+            style: ElevatedButton.styleFrom(foregroundColor: Colors.white),
+            icon: Icon(Icons.mail, size: 30),
+            label: Text('kue')));
+  }
+>>>>>>> d4f63039de1922eb3a6b9eb75df0385fad4ec416
 
   // Widget Minuman() {
   //   return Container(

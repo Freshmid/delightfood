@@ -262,6 +262,7 @@ class _LoginScreen extends State<Login> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
+                alignment: Alignment.center,
                 color: Colors.white,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),

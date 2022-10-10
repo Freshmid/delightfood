@@ -180,6 +180,7 @@ class _FpNewPassword extends State<FpNewPassword> {
                   Container(
                     height: double.infinity,
                     width: double.infinity,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: Colors.white
                     ),

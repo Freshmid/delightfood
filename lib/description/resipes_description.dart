@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'givestars.dart';
-import '../items.dart';
+import '../obj_resep.dart';
 
 class RecipesDescription extends StatefulWidget {
   const RecipesDescription({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
                 height: MediaQuery.of(context).size.height / 5,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(recipesAll.recipe[2].path),
+                        image: AssetImage(recipesAll.recipe[2].image),
                         fit: BoxFit.cover)),
               ),
               Container(

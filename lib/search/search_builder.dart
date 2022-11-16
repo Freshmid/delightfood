@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../items.dart';
+import '../obj_resep.dart';
 import 'search.dart';
 
 class CategoryItems extends StatefulWidget {
@@ -22,7 +22,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(image: AssetImage(recipesAll.recipe[i].path), fit: BoxFit.cover)
+          image: DecorationImage(image: AssetImage(recipesAll.recipe[i].image), fit: BoxFit.cover)
         ),
         child: ElevatedButton(
           onPressed: () {

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../base_app/base.dart';
 import 'login.dart';
+import 'package:http/http.dart' as http;
 
 class SignUp extends StatefulWidget {
   @override
@@ -12,6 +15,47 @@ class _SignUpScreen extends State<SignUp> {
 
   bool _isHide = true;
   bool _isHide2 = true;
+
+  final namecontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  final confpasswordcontroller = TextEditingController();
+
+
+  void dispose (){
+    namecontroller.dispose();
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    confpasswordcontroller.dispose();
+    super.dispose();
+  }
+
+  void fetchRegister() async {
+    print("Menunggu Respon");
+    final response = await http.post(Uri.parse('http://192.168.1.13:8000/api/login'));
+  
+    var responseData = json.decode(response.body);
+
+    print("Respon");
+    print(responseData);
+    // goHome()
+    // List<User> users = [];
+    // for (var singleUser in responseData) {
+    //   User user = User(
+    //       id: singleUser["id"],
+    //       userId: singleUser["userId"],
+    //       title: singleUser["title"],
+    //       body: singleUser["body"]);
+  
+    //   //Adding user to the list.
+    //   users.add(user);
+    // }
+    // return users;
+  }
+
+
+
+
 
   void goHome() {
     Navigator.of(context).push(
@@ -57,6 +101,7 @@ class _SignUpScreen extends State<SignUp> {
           ),
           height: 60,
           child: TextField(
+            controller: namecontroller,
             keyboardType: TextInputType.name,
             style: TextStyle(
                 color: Colors.black87
@@ -107,6 +152,7 @@ class _SignUpScreen extends State<SignUp> {
           ),
           height: 60,
           child: TextField(
+            controller: emailcontroller,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
                 color: Colors.black87
@@ -157,6 +203,7 @@ class _SignUpScreen extends State<SignUp> {
           ),
           height: 60,
           child: TextField(
+            controller: passwordcontroller,
             obscureText: _isHide,
             style: TextStyle(
                 color: Colors.black87
@@ -218,6 +265,7 @@ class _SignUpScreen extends State<SignUp> {
           ),
           height: 60,
           child: TextField(
+            controller:confpasswordcontroller,
             obscureText: _isHide2,
             style: TextStyle(
                 color: Colors.black87
@@ -265,7 +313,7 @@ class _SignUpScreen extends State<SignUp> {
               backgroundColor: Color(0xFFE7872C)
           ),
           onPressed: () {
-            goHome();
+            fetchRegister();
           },
           child: Text(
             "SIGN UP",

@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../base_app/base.dart';
 import 'signup.dart';
 import 'forgot_password/fpemail.dart';
+import 'package:http/http.dart' as http;
+
+
 
 class Login extends StatefulWidget {
   @override
@@ -11,8 +16,39 @@ class Login extends StatefulWidget {
 
 class _LoginScreen extends State<Login> {
   bool _isRemember = false;
-
   bool _isHide = true;
+
+  final emailcontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  @override
+  void dispose (){
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    super.dispose();
+  }
+
+
+  void fetchLogin() async {
+    print("Menunggu respon");
+    final response =
+        await http.post(Uri.parse('http://10.160.86.196:8000/api/login'), 
+        headers: <String, String> {
+          "Content-Type":"application/json;charset=UTF-8"
+        },
+        body: jsonEncode(<String, String>{
+          "email":emailcontroller.text,
+          "password":passwordcontroller.text,
+        })
+        );
+    print("Respon");
+    if (response.statusCode == 200) {
+      jsonDecode(response.body) ?  goHome(): print("SALAH"); 
+    } else {
+      throw Exception('Failed to load');
+    }
+  }
+
+
 
   void goHome() {
     Navigator.of(context).push(
@@ -66,6 +102,7 @@ class _LoginScreen extends State<Login> {
           ),
           height: 60,
           child: TextField(
+            controller: emailcontroller,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
                 color: Colors.black87
@@ -116,6 +153,7 @@ class _LoginScreen extends State<Login> {
           ),
           height: 60,
           child: TextField(
+            controller: passwordcontroller,
             obscureText: _isHide,
             style: TextStyle(
                 color: Colors.black87
@@ -210,7 +248,7 @@ class _LoginScreen extends State<Login> {
           backgroundColor: Color(0xFFE7872C)
         ),
         onPressed: () {
-          goHome();
+          fetchLogin();
         },
         child: Text(
           "LOGIN",

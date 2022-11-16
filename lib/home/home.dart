@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         Container(
             width: MediaQuery.of(context).size.width/2,
             height: MediaQuery.of(context).size.width/2.5,
-            child: InspiringItems(),
+            child: InspiringResep(),
             ),
         // Container(
         //   height: 20,
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: RecommendedItems(),
+          child: RecommendedResep(),
         ),
       ],
     );

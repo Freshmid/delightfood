@@ -1,46 +1,67 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'custom_fonts.dart';
-import '../items.dart';
+import '../obj_resep.dart';
 import '../description/resipes_description.dart';
+import 'package:http/http.dart' as http;
 
-class InspiringItems extends StatefulWidget {
-  const InspiringItems({Key? key}) : super(key: key);
+// import 'package:delightfood/testapi.dart';
+
+class InspiringResep extends StatefulWidget {
+  const InspiringResep({Key? key}) : super(key: key);
+
+
 
   @override
-  _InspiringItemsState createState() => _InspiringItemsState();
+  _InspiringResepState createState() => _InspiringResepState();
 }
 
-class _InspiringItemsState extends State<InspiringItems> {
-  // final dataCar = <Widget>[];
-  // _InspiringItemsState() {
-  //   for (var i = 0; i < recipesAll.recipe.length; i++) {
-  //     dataCar.add(Container(
-  //       padding: EdgeInsets.all(4.0),
-  //       width: 200,
-  //       height: 200,
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(8),
-  //       ),
-  //       child: GestureDetector(
-  //         // onTap: ,
-  //         child: Image.asset(
-  //           recipesAll.recipe[i].path,
-  //           fit: BoxFit.cover,
-  //         ),
-  //       ),
-  //     ));
+class _InspiringResepState extends State<InspiringResep> {
+  // late Future<List<Resep>> resep;
+
+  // API
+  // Future<List<Resep>> fetchResep() async {
+  //   final response =
+  //       await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+
+  //   if (response.statusCode == 200) {
+  //     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+  //     return parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
+  //     // var namastatedisini = parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
+  //   } else {
+  //     throw Exception('Failed to load recipe');
   //   }
+  // }
+  fetchResep() async {
+    final response =
+        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
+
+    if (response.statusCode == 200) {
+      // final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+
+      //  print(parsed.map<testResep>((json) => testResep.fromMap(json)).toList());
+      print(jsonDecode(response.body));
+      // var namastatedisini = parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
+    } else {
+      throw Exception('Failed to load recipe');
+    }
+  }
+
+  // _InspiringResepState(){
+  //   resep = fetchResep();
   // }
 
   Widget components(BuildContext context, i) {
     return GestureDetector(
-      // onTap: ,
+      onTap: () {fetchResep();},
       child: Container(
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(recipesAll.recipe[i].path), fit: BoxFit.cover),
+              image: AssetImage(recipesAll.recipe[i].image), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(8),
         ),
       ),
@@ -70,14 +91,14 @@ class _InspiringItemsState extends State<InspiringItems> {
 // }
 // }
 
-class RecommendedItems extends StatefulWidget {
-  const RecommendedItems({Key? key}) : super(key: key);
+class RecommendedResep extends StatefulWidget {
+  const RecommendedResep({Key? key}) : super(key: key);
 
   @override
-  State<RecommendedItems> createState() => _RecommendedItemsState();
+  State<RecommendedResep> createState() => _RecommendedResepState();
 }
 
-class _RecommendedItemsState extends State<RecommendedItems> {
+class _RecommendedResepState extends State<RecommendedResep> {
 
   void readDescription() {
     Navigator.of(context).push(
@@ -125,7 +146,7 @@ class _RecommendedItemsState extends State<RecommendedItems> {
                         : MediaQuery.of(context).size.height / 6,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(image: AssetImage(recipesAll.recipe[i].path),fit: BoxFit.cover)
+                      image: DecorationImage(image: AssetImage(recipesAll.recipe[i].image),fit: BoxFit.cover)
                     ),
                   ),
                 ),

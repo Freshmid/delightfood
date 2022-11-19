@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../base_app/base.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
@@ -31,6 +32,7 @@ class _SignUpScreen extends State<SignUp> {
   }
 
   void fetchRegister() async {
+    final prefs = await SharedPreferences.getInstance();
     final response = await http.post(
         Uri.parse("${dotenv.get('API_URL')}/register"),
         headers: <String, String>{
@@ -43,7 +45,10 @@ class _SignUpScreen extends State<SignUp> {
           "confirmPassword": confpasswordcontroller.text,
         }));
     if (response.statusCode == 200) {
-      jsonDecode(response.body)["status"] == true ? goHome() : print("SALAH");
+      if (jsonDecode(response.body)["status"] == true) {
+        await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        goHome();
+      }
     } else {
       throw Exception('Failed to load');
     }

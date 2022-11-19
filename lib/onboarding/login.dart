@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../base_app/base.dart';
 import 'signup.dart';
 import 'forgot_password/fpemail.dart';
@@ -27,6 +28,7 @@ class _LoginScreen extends State<Login> {
   }
 
   void fetchLogin() async {
+    final prefs = await SharedPreferences.getInstance();
     final response = await http.post(
         Uri.parse("${dotenv.get('API_URL')}/login"),
         headers: <String, String>{
@@ -37,7 +39,10 @@ class _LoginScreen extends State<Login> {
           "password": passwordcontroller.text,
         }));
     if (response.statusCode == 200) {
-      jsonDecode(response.body) ? goHome() : print("SALAH");
+      if (jsonDecode(response.body)["status"] == true) {
+        await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        goHome();
+      }
     } else {
       throw Exception('Failed to load');
     }

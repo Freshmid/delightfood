@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../base_app/base.dart';
 import 'login.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +13,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUp> {
-
   bool _isHide = true;
   bool _isHide2 = true;
 
@@ -21,8 +21,8 @@ class _SignUpScreen extends State<SignUp> {
   final passwordcontroller = TextEditingController();
   final confpasswordcontroller = TextEditingController();
 
-
-  void dispose (){
+  @override
+  void dispose() {
     namecontroller.dispose();
     emailcontroller.dispose();
     passwordcontroller.dispose();
@@ -31,31 +31,23 @@ class _SignUpScreen extends State<SignUp> {
   }
 
   void fetchRegister() async {
-    print("Menunggu Respon");
-    final response = await http.post(Uri.parse('http://192.168.1.13:8000/api/login'));
-  
-    var responseData = json.decode(response.body);
-
-    print("Respon");
-    print(responseData);
-    // goHome()
-    // List<User> users = [];
-    // for (var singleUser in responseData) {
-    //   User user = User(
-    //       id: singleUser["id"],
-    //       userId: singleUser["userId"],
-    //       title: singleUser["title"],
-    //       body: singleUser["body"]);
-  
-    //   //Adding user to the list.
-    //   users.add(user);
-    // }
-    // return users;
+    final response = await http.post(
+        Uri.parse("${dotenv.get('API_URL')}/register"),
+        headers: <String, String>{
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        body: jsonEncode(<String, String>{
+          "fullname": namecontroller.text,
+          "email": emailcontroller.text,
+          "password": passwordcontroller.text,
+          "confirmPassword": confpasswordcontroller.text,
+        }));
+    if (response.statusCode == 200) {
+      jsonDecode(response.body)["status"] == true ? goHome() : print("SALAH");
+    } else {
+      throw Exception('Failed to load');
+    }
   }
-
-
-
-
 
   void goHome() {
     Navigator.of(context).push(
@@ -82,8 +74,7 @@ class _SignUpScreen extends State<SignUp> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -93,31 +84,19 @@ class _SignUpScreen extends State<SignUp> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             controller: namecontroller,
             keyboardType: TextInputType.name,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.people,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.people, color: Color(0xFFE7872C)),
                 hintText: 'Fullname',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -133,8 +112,7 @@ class _SignUpScreen extends State<SignUp> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -144,31 +122,19 @@ class _SignUpScreen extends State<SignUp> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             controller: emailcontroller,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.email,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.email, color: Color(0xFFE7872C)),
                 hintText: 'Email',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -184,8 +150,7 @@ class _SignUpScreen extends State<SignUp> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -195,26 +160,17 @@ class _SignUpScreen extends State<SignUp> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             controller: passwordcontroller,
             obscureText: _isHide,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.lock,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.lock, color: Color(0xFFE7872C)),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isHide ? Icons.visibility : Icons.visibility_off,
@@ -227,10 +183,7 @@ class _SignUpScreen extends State<SignUp> {
                   },
                 ),
                 hintText: 'Password',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -246,8 +199,7 @@ class _SignUpScreen extends State<SignUp> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -257,26 +209,17 @@ class _SignUpScreen extends State<SignUp> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
-            controller:confpasswordcontroller,
+            controller: confpasswordcontroller,
             obscureText: _isHide2,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.lock,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.lock, color: Color(0xFFE7872C)),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isHide2 ? Icons.visibility : Icons.visibility_off,
@@ -289,10 +232,7 @@ class _SignUpScreen extends State<SignUp> {
                   },
                 ),
                 hintText: 'Confirm Password',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -308,22 +248,17 @@ class _SignUpScreen extends State<SignUp> {
               elevation: 5,
               padding: EdgeInsets.all(15),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)
-              ),
-              backgroundColor: Color(0xFFE7872C)
-          ),
+                  borderRadius: BorderRadius.circular(15)),
+              backgroundColor: Color(0xFFE7872C)),
           onPressed: () {
             fetchRegister();
+            // goHome();
           },
           child: Text(
             "SIGN UP",
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-            ),
-          )
-      ),
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          )),
     );
   }
 
@@ -333,23 +268,15 @@ class _SignUpScreen extends State<SignUp> {
         goLogin();
       },
       child: RichText(
-        text: TextSpan(
-            children: [
-              TextSpan(
-                  text: 'Already have an account? ',
-                  style: TextStyle(
-                      color: Color(0xFFE7872C)
-                  )
-              ),
-              TextSpan(
-                  text: 'Login',
-                  style: TextStyle(
-                      color: Color(0xFFE7872C),
-                      fontWeight: FontWeight.bold
-                  )
-              )
-            ]
-        ),
+        text: TextSpan(children: [
+          TextSpan(
+              text: 'Already have an account? ',
+              style: TextStyle(color: Color(0xFFE7872C))),
+          TextSpan(
+              text: 'Login',
+              style: TextStyle(
+                  color: Color(0xFFE7872C), fontWeight: FontWeight.bold))
+        ]),
       ),
     );
   }
@@ -366,15 +293,10 @@ class _SignUpScreen extends State<SignUp> {
                 height: double.infinity,
                 width: double.infinity,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.white
-                ),
+                decoration: BoxDecoration(color: Colors.white),
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 120
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -382,8 +304,7 @@ class _SignUpScreen extends State<SignUp> {
                         height: 100,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/logos/logo_nobg.png")
-                          ),
+                              image: AssetImage("assets/logos/logo_nobg.png")),
                         ),
                       ),
                       Text(
@@ -391,8 +312,7 @@ class _SignUpScreen extends State<SignUp> {
                         style: TextStyle(
                             color: Color(0xFFE7872C),
                             fontSize: 30,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 50),
                       inputFullname(),

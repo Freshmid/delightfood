@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../base_app/base.dart';
 import 'signup.dart';
 import 'forgot_password/fpemail.dart';
 import 'package:http/http.dart' as http;
-
-
 
 class Login extends StatefulWidget {
   @override
@@ -21,34 +20,28 @@ class _LoginScreen extends State<Login> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   @override
-  void dispose (){
+  void dispose() {
     emailcontroller.dispose();
     passwordcontroller.dispose();
     super.dispose();
   }
 
-
   void fetchLogin() async {
-    print("Menunggu respon");
-    final response =
-        await http.post(Uri.parse('http://10.160.86.196:8000/api/login'), 
-        headers: <String, String> {
-          "Content-Type":"application/json;charset=UTF-8"
+    final response = await http.post(
+        Uri.parse("${dotenv.get('API_URL')}/login"),
+        headers: <String, String>{
+          "Content-Type": "application/json;charset=UTF-8"
         },
         body: jsonEncode(<String, String>{
-          "email":emailcontroller.text,
-          "password":passwordcontroller.text,
-        })
-        );
-    print("Respon");
+          "email": emailcontroller.text,
+          "password": passwordcontroller.text,
+        }));
     if (response.statusCode == 200) {
-      jsonDecode(response.body) ?  goHome(): print("SALAH"); 
+      jsonDecode(response.body) ? goHome() : print("SALAH");
     } else {
       throw Exception('Failed to load');
     }
   }
-
-
 
   void goHome() {
     Navigator.of(context).push(
@@ -83,8 +76,7 @@ class _LoginScreen extends State<Login> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -94,31 +86,19 @@ class _LoginScreen extends State<Login> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             controller: emailcontroller,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.email,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.email, color: Color(0xFFE7872C)),
                 hintText: 'Email',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -134,8 +114,7 @@ class _LoginScreen extends State<Login> {
           style: TextStyle(
               fontSize: 16,
               color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -145,26 +124,17 @@ class _LoginScreen extends State<Login> {
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
+                    color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+              ]),
           height: 60,
           child: TextField(
             controller: passwordcontroller,
             obscureText: _isHide,
-            style: TextStyle(
-                color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.lock,
-                    color: Color(0xFFE7872C)
-                ),
+                prefixIcon: Icon(Icons.lock, color: Color(0xFFE7872C)),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isHide ? Icons.visibility : Icons.visibility_off,
@@ -177,10 +147,7 @@ class _LoginScreen extends State<Login> {
                   },
                 ),
                 hintText: 'Password',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
+                hintStyle: TextStyle(color: Colors.black38)),
           ),
         )
       ],
@@ -196,10 +163,8 @@ class _LoginScreen extends State<Login> {
         },
         child: Text(
           "Forget Password?",
-          style: TextStyle(
-              color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
+          style:
+              TextStyle(color: Color(0xFFE7872C), fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -221,13 +186,10 @@ class _LoginScreen extends State<Login> {
                     _isRemember = value!;
                   });
                 },
-              )
-          ),
+              )),
           Text(
             "Remember Me",
-            style: TextStyle(
-                color: Color(0xFFE7872C)
-            ),
+            style: TextStyle(color: Color(0xFFE7872C)),
           )
         ],
       ),
@@ -239,26 +201,20 @@ class _LoginScreen extends State<Login> {
       padding: EdgeInsets.symmetric(vertical: 25),
       width: double.infinity,
       child: ElevatedButton(
-        style: TextButton.styleFrom(
-          elevation: 5,
-          padding: EdgeInsets.all(15),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15)
-          ),
-          backgroundColor: Color(0xFFE7872C)
-        ),
-        onPressed: () {
-          fetchLogin();
-        },
-        child: Text(
-          "LOGIN",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold
-          ),
-        )
-      ),
+          style: TextButton.styleFrom(
+              elevation: 5,
+              padding: EdgeInsets.all(15),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              backgroundColor: Color(0xFFE7872C)),
+          onPressed: () {
+            fetchLogin();
+          },
+          child: Text(
+            "LOGIN",
+            style: TextStyle(
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          )),
     );
   }
 
@@ -268,23 +224,15 @@ class _LoginScreen extends State<Login> {
         goSignUp();
       },
       child: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
+        text: TextSpan(children: [
+          TextSpan(
               text: 'Don\'t have any account? ',
-              style: TextStyle(
-                  color: Color(0xFFE7872C)
-              )
-            ),
-            TextSpan(
+              style: TextStyle(color: Color(0xFFE7872C))),
+          TextSpan(
               text: 'Sign Up',
               style: TextStyle(
-                  color: Color(0xFFE7872C),
-                  fontWeight: FontWeight.bold
-              )
-            )
-          ]
-        ),
+                  color: Color(0xFFE7872C), fontWeight: FontWeight.bold))
+        ]),
       ),
     );
   }
@@ -304,10 +252,7 @@ class _LoginScreen extends State<Login> {
                 color: Colors.white,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 120
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -315,8 +260,7 @@ class _LoginScreen extends State<Login> {
                         height: 100,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage("assets/logos/logo_nobg.png")
-                          ),
+                              image: AssetImage("assets/logos/logo_nobg.png")),
                         ),
                       ),
                       Text(
@@ -324,8 +268,7 @@ class _LoginScreen extends State<Login> {
                         style: TextStyle(
                             color: Color(0xFFE7872C),
                             fontSize: 30,
-                            fontWeight: FontWeight.bold
-                        ),
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 50),
                       inputEmail(),

@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../base_app/base.dart';
+import 'package:http/http.dart' as http;
 
 class Setprofile extends StatefulWidget {
   const Setprofile({Key? key}) : super(key: key);
@@ -9,6 +14,28 @@ class Setprofile extends StatefulWidget {
 }
 
 class _setprofilScreen extends State<Setprofile> {
+  final namacontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final tanggallahircontroller = TextEditingController();
+  var image;
+
+  _setprofilScreen() {
+    getUser();
+  }
+
+  void getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final response =
+        await http.get(Uri.parse("${dotenv.get('API_URL')}/user?id=1"));
+    print(jsonDecode(response.body)["data"]);
+    namacontroller.text = jsonDecode(response.body)["data"]["nama"];
+    emailcontroller.text = jsonDecode(response.body)["data"]["email"];
+    tanggallahircontroller.text =
+        jsonDecode(response.body)["data"]["tanggal_lahir"];
+    image = jsonDecode(response.body)["data"]["gambar"];
+    setState(() {});
+  }
+
   void backtoBase() {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -32,7 +59,7 @@ class _setprofilScreen extends State<Setprofile> {
                 CircleAvatar(
                   radius: 50.0,
                   backgroundImage:
-                      AssetImage('assets/images/img-onboarding.png'),
+                      NetworkImage("${dotenv.get('ASSET_URL')}/user/${image}"),
                 )
               ],
             ),
@@ -60,7 +87,7 @@ class _setprofilScreen extends State<Setprofile> {
             ),
             // lokasi(),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 40,horizontal: 0),
+              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
               child: ElevatedButton(
                   style: TextButton.styleFrom(
                     elevation: 5,
@@ -109,6 +136,7 @@ class _setprofilScreen extends State<Setprofile> {
               ]),
           height: 60,
           child: TextField(
+            controller: namacontroller,
             keyboardType: TextInputType.name,
             style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
@@ -146,6 +174,7 @@ class _setprofilScreen extends State<Setprofile> {
               ]),
           height: 60,
           child: TextField(
+            controller: emailcontroller,
             keyboardType: TextInputType.name,
             style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(
@@ -183,6 +212,7 @@ class _setprofilScreen extends State<Setprofile> {
               ]),
           height: 60,
           child: TextField(
+            controller: tanggallahircontroller,
             keyboardType: TextInputType.datetime,
             style: TextStyle(color: Colors.black87),
             decoration: InputDecoration(

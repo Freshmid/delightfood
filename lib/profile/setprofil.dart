@@ -25,15 +25,35 @@ class _setprofilScreen extends State<Setprofile> {
 
   void getUser() async {
     final prefs = await SharedPreferences.getInstance();
-    final response =
-        await http.get(Uri.parse("${dotenv.get('API_URL')}/user?id=1"));
-    print(jsonDecode(response.body)["data"]);
+    final response = await http.get(Uri.parse(
+        "${dotenv.get('API_URL')}/user?id=${prefs.getInt('user_id')}"));
     namacontroller.text = jsonDecode(response.body)["data"]["nama"];
     emailcontroller.text = jsonDecode(response.body)["data"]["email"];
     tanggallahircontroller.text =
         jsonDecode(response.body)["data"]["tanggal_lahir"];
     image = jsonDecode(response.body)["data"]["gambar"];
     setState(() {});
+  }
+
+  void updateUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final response = await http.post(
+        Uri.parse(
+            "${dotenv.get('API_URL')}/update-user/${prefs.getInt('user_id')}}"),
+        headers: <String, String>{
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        body: jsonEncode(<String, String>{
+          'nama': namacontroller.text,
+          'email': emailcontroller.text,
+          'tanggal_lahir': tanggallahircontroller.text
+        }));
+    if (response.statusCode == 200) {
+      print(jsonDecode(response.body)["data"]);
+    } else {
+      print(jsonDecode(response.body)["data"]);
+      throw Exception('Failed to load');
+    }
   }
 
   void backtoBase() {
@@ -97,7 +117,8 @@ class _setprofilScreen extends State<Setprofile> {
                     backgroundColor: Color(0xFFff9934),
                   ),
                   onPressed: () {
-                    backtoBase();
+                    updateUser();
+                    // backtoBase();
                   },
                   child: Text(
                     "Selesai",

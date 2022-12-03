@@ -1,4 +1,5 @@
 import 'package:delightfood/profile/profilebar.dart';
+import 'package:delightfood/resep/inputresep.dart';
 import 'package:flutter/material.dart';
 import '../home/home.dart';
 import 'appbar.dart';
@@ -19,7 +20,7 @@ class _BaseAppState extends State<BaseApp> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[  
     HomePage(),
-    HomePage(),
+    InputResep(),
     Kategori(),
     Profile(),
     BaseAppBar(),

@@ -28,19 +28,25 @@ class _LoginScreen extends State<Login> {
   }
 
   void fetchLogin() async {
+    // goHome();
     final prefs = await SharedPreferences.getInstance();
+    print("----Sending Request----");
     final response = await http.post(
-        Uri.parse("${dotenv.get('API_URL')}/login"),
-        headers: <String, String>{
-          "Content-Type": "application/json;charset=UTF-8"
-        },
-        body: jsonEncode(<String, String>{
-          "email": emailcontroller.text,
-          "password": passwordcontroller.text,
-        }));
+      // Uri.parse("${dotenv.get('http://delight.foundid.my.id/api')}/login"),
+      Uri.parse('http://delight.foundid.my.id/api/login'),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+      body: jsonEncode(<String, String>{
+        "email": emailcontroller.text,
+        "password": passwordcontroller.text,
+      }));
+    print(emailcontroller);
+    print("----Login----");
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["status"] == true) {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        print("---Complete----");
         goHome();
       }
     } else {

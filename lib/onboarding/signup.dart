@@ -33,8 +33,10 @@ class _SignUpScreen extends State<SignUp> {
 
   void fetchRegister() async {
     final prefs = await SharedPreferences.getInstance();
+    print("----Sending Request----");
     final response = await http.post(
-        Uri.parse("${dotenv.get('API_URL')}/register"),
+      // Uri.parse("${dotenv.get('API_URL')}/register"),
+        Uri.parse('http://delight.foundid.my.id/api/register'),
         headers: <String, String>{
           "Content-Type": "application/json;charset=UTF-8"
         },
@@ -44,9 +46,11 @@ class _SignUpScreen extends State<SignUp> {
           "password": passwordcontroller.text,
           "confirmPassword": confpasswordcontroller.text,
         }));
+    print("----Sign Up----");
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["status"] == true) {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        print("----Complete----");
         goHome();
       }
     } else {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../base_app/base.dart';
@@ -17,6 +18,7 @@ class Login extends StatefulWidget {
 class _LoginScreen extends State<Login> {
   bool _isRemember = false;
   bool _isHide = true;
+  bool _wrong = false;
 
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
@@ -28,9 +30,12 @@ class _LoginScreen extends State<Login> {
   }
 
   void fetchLogin() async {
+    // goHome();
     final prefs = await SharedPreferences.getInstance();
+    print("----Sending Request----");
     final response = await http.post(
-        Uri.parse("${dotenv.get('API_URL')}/login"),
+      // Uri.parse("${dotenv.get('http://delight.foundid.my.id/api')}/login"),
+        Uri.parse('http://delight.foundid.my.id/api/login'),
         headers: <String, String>{
           "Content-Type": "application/json;charset=UTF-8"
         },
@@ -38,10 +43,23 @@ class _LoginScreen extends State<Login> {
           "email": emailcontroller.text,
           "password": passwordcontroller.text,
         }));
+    print(emailcontroller);
+    print("----Login----");
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["status"] == true) {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        print("---Complete----");
         goHome();
+      } else {
+        // // bool _wrong = true;
+        // //             if (_wrong) {
+        // CoolAlert.show(
+        //     context: context,
+        //     type: CoolAlertType.error,
+        //     title: 'Eror',
+        //     text: "Username Atau Password Yang Dimasukkan Salah ",
+        //     confirmBtnText: 'Oke');
+        // // }
       }
     } else {
       throw Exception('Failed to load');
@@ -169,7 +187,7 @@ class _LoginScreen extends State<Login> {
         child: Text(
           "Forget Password?",
           style:
-              TextStyle(color: Color(0xFFE7872C), fontWeight: FontWeight.bold),
+          TextStyle(color: Color(0xFFE7872C), fontWeight: FontWeight.bold),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'custom_fonts.dart';
 import '../obj_resep.dart';
 import '../description/resipes_description.dart';
@@ -18,44 +19,42 @@ class InspiringResep extends StatefulWidget {
 }
 
 class _InspiringResepState extends State<InspiringResep> {
-  // late Future<List<Resep>> resep;
-
   // API
-  // Future<List<Resep>> fetchResep() async {
-  //   final response =
-  //       await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-
-  //   if (response.statusCode == 200) {
-  //     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-
-  //     return parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
-  //     // var namastatedisini = parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
-  //   } else {
-  //     throw Exception('Failed to load recipe');
-  //   }
+  // final emailcontroller = TextEditingController();
+  // final passwordcontroller = TextEditingController();
+  // @override
+  // void dispose() {
+  //   emailcontroller.dispose();
+  //   passwordcontroller.dispose();
+  //   super.dispose();
   // }
-  fetchResep() async {
-    final response =
-        await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-
-    if (response.statusCode == 200) {
-      // final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-
-      //  print(parsed.map<testResep>((json) => testResep.fromMap(json)).toList());
-      print(jsonDecode(response.body));
-      // var namastatedisini = parsed.map<Resep>((json) => Resep.fromMap(json)).toList();
-    } else {
-      throw Exception('Failed to load recipe');
-    }
-  }
-
-  // _InspiringResepState(){
-  //   resep = fetchResep();
+  // void fetchHome() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   print("----Sending Request----");
+  //   final response = await http.post(
+  //     // Uri.parse("${dotenv.get('http://delight.foundid.my.id/api')}/login"),
+  //     Uri.parse('http://delight.foundid.my.id/api/login'),
+  //     headers: <String, String>{
+  //       "Content-Type": "application/json;charset=UTF-8"
+  //     },
+  //     body: jsonEncode(<String, String>{
+  //       "email": emailcontroller.text,
+  //       "password": passwordcontroller.text,
+  //     }));
+  //   print("----Login----");
+  //   if (response.statusCode == 200) {
+  //     if (jsonDecode(response.body)["status"] == true) {
+  //       await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+  //       print("---Complete----");
+  //     }
+  //   } else {
+  //     throw Exception('Failed to load');
+  //   }
   // }
 
   Widget components(BuildContext context, i) {
     return GestureDetector(
-      onTap: () {fetchResep();},
+      // onTap: () {fetchHome();},
       child: Container(
         width: MediaQuery.of(context).size.width / 2,
         height: MediaQuery.of(context).size.width / 2,

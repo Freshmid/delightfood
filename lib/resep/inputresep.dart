@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+
 
 class InputResep extends StatefulWidget {
   const InputResep({ Key? key }) : super(key: key);
@@ -9,6 +14,45 @@ class InputResep extends StatefulWidget {
 }
 
 class _InputResep extends State<InputResep> {
+
+  bool _isRemember = false;
+  bool _isHide = true;
+
+  final titlecontroller = TextEditingController();
+  final descriptioncontroller = TextEditingController();
+  @override
+  void dispose() {
+    titlecontroller.dispose();
+    descriptioncontroller.dispose();
+    super.dispose();
+  }
+
+  void fetchLogin() async {
+    // goHome();
+    final prefs = await SharedPreferences.getInstance();
+    print("----Sending Request----");
+    final response = await http.post(
+      // Uri.parse("${dotenv.get('http://delight.foundid.my.id/api')}/login"),
+      Uri.parse('http://delight.foundid.my.id/api/resep'),
+      headers: <String, String>{
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+      body: jsonEncode(<String, String>{
+        "nama": titlecontroller.text,
+        "deskripsi": descriptioncontroller.text,
+      }));
+    print("----Upload Recipe----");
+    if (response.statusCode == 200) {
+      if (jsonDecode(response.body)["status"] == true) {
+        await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        print("----Complete----");
+      }
+    } else {
+      throw Exception('Failed to load');
+    }
+  }
+  
+
   Widget inputImage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,6 +125,7 @@ class _InputResep extends State<InputResep> {
           ),
           height: 60,
           child: TextField(
+            controller: titlecontroller,
             style: TextStyle(
                 color: Colors.black87
             ),
@@ -109,6 +154,7 @@ class _InputResep extends State<InputResep> {
         Text(
           "Deskripsi Makanan",
           style: TextStyle(
+            
               fontSize: 16,
               color: Color(0xFFE7872C),
               fontWeight: FontWeight.bold
@@ -130,6 +176,7 @@ class _InputResep extends State<InputResep> {
           ),
           height: 60,
           child: TextField(
+            controller: descriptioncontroller,
             style: TextStyle(
                 color: Colors.black87
             ),
@@ -151,103 +198,103 @@ class _InputResep extends State<InputResep> {
     );
   }
 
-  Widget inputAlat() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Alat dan Bahan yang Diperlukan",
-          style: TextStyle(
-              fontSize: 16,
-              color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        SizedBox(height: 10),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
-          height: 60,
-          child: TextField(
-            style: TextStyle(
-                color: Colors.black87
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.toc,
-                    color: Color(0xFFE7872C)
-                ),
-                hintText: 'Alat dan bahan',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  // Widget inputAlat() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         "Alat dan Bahan yang Diperlukan",
+  //         style: TextStyle(
+  //             fontSize: 16,
+  //             color: Color(0xFFE7872C),
+  //             fontWeight: FontWeight.bold
+  //         ),
+  //       ),
+  //       SizedBox(height: 10),
+  //       Container(
+  //         alignment: Alignment.centerLeft,
+  //         decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(10),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                   color: Colors.black26,
+  //                   blurRadius: 6,
+  //                   offset: Offset(0,2)
+  //               )
+  //             ]
+  //         ),
+  //         height: 60,
+  //         child: TextField(
+  //           style: TextStyle(
+  //               color: Colors.black87
+  //           ),
+  //           decoration: InputDecoration(
+  //               border: InputBorder.none,
+  //               contentPadding: EdgeInsets.only(top: 14),
+  //               prefixIcon: Icon(
+  //                   Icons.toc,
+  //                   color: Color(0xFFE7872C)
+  //               ),
+  //               hintText: 'Alat dan bahan',
+  //               hintStyle: TextStyle(
+  //                   color: Colors.black38
+  //               )
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
-  Widget inputCara() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Langkah-Langkah Memasak",
-          style: TextStyle(
-              fontSize: 16,
-              color: Color(0xFFE7872C),
-              fontWeight: FontWeight.bold
-          ),
-        ),
-        SizedBox(height: 10),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0,2)
-                )
-              ]
-          ),
-          height: 60,
-          child: TextField(
-            style: TextStyle(
-                color: Colors.black87
-            ),
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14),
-                prefixIcon: Icon(
-                    Icons.toc,
-                    color: Color(0xFFE7872C)
-                ),
-                hintText: 'Langkah-langkah',
-                hintStyle: TextStyle(
-                    color: Colors.black38
-                )
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  // Widget inputCara() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         "Langkah-Langkah Memasak",
+  //         style: TextStyle(
+  //             fontSize: 16,
+  //             color: Color(0xFFE7872C),
+  //             fontWeight: FontWeight.bold
+  //         ),
+  //       ),
+  //       SizedBox(height: 10),
+  //       Container(
+  //         alignment: Alignment.centerLeft,
+  //         decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             borderRadius: BorderRadius.circular(10),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                   color: Colors.black26,
+  //                   blurRadius: 6,
+  //                   offset: Offset(0,2)
+  //               )
+  //             ]
+  //         ),
+  //         height: 60,
+  //         child: TextField(
+  //           style: TextStyle(
+  //               color: Colors.black87
+  //           ),
+  //           decoration: InputDecoration(
+  //               border: InputBorder.none,
+  //               contentPadding: EdgeInsets.only(top: 14),
+  //               prefixIcon: Icon(
+  //                   Icons.toc,
+  //                   color: Color(0xFFE7872C)
+  //               ),
+  //               hintText: 'Langkah-langkah',
+  //               hintStyle: TextStyle(
+  //                   color: Colors.black38
+  //               )
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
   Widget saveButton() {
     return Container(
@@ -319,10 +366,10 @@ class _InputResep extends State<InputResep> {
                           inputName(),
                           SizedBox(height: 20),
                           inputDeskripsi(),
-                          SizedBox(height: 20),
-                          inputAlat(),
-                          SizedBox(height: 20),
-                          inputCara(),
+                          // SizedBox(height: 20),
+                          // inputAlat(),
+                          // SizedBox(height: 20),
+                          // inputCara(),
                           SizedBox(height: 20),
                           saveButton()
                         ],

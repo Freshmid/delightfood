@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'givestars.dart';
 import '../obj_resep.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../Loading.dart';
 
 class RecipesDescription extends StatefulWidget {
-  const RecipesDescription({Key? key}) : super(key: key);
+  final int id;
+  const RecipesDescription(this.id, {Key? key}) : super(key: key);
 
   @override
   _RecipesDescriptionState createState() => _RecipesDescriptionState();
 }
 
 class _RecipesDescriptionState extends State<RecipesDescription> {
+  bool _isLoading = false;
   double rating = 3.5;
 
   // @override
@@ -20,60 +25,77 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
   //   );
   // }
 
+  Future getResep(id) async {
+    _isLoading = true;
+    final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/detail-resep?id=$id'));
+    if (response.statusCode == 200) {
+      _isLoading = false;
+      return jsonDecode(response.body);
+    } else {
+      _isLoading = false;
+      throw Exception('Failed to load recipe');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFff9934),
-        title: Text(
-          recipesAll.recipe[2].title,
-          style: TextStyle(fontSize: 24, color: Colors.white),
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(color: Color.fromARGB(255, 255, 242, 224)),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Column(children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 5,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(recipesAll.recipe[2].image),
-                        fit: BoxFit.cover)),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Text(
-                  recipesAll.recipe[2].description,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 18,
+    return FutureBuilder(
+      future: getResep(widget.id+1),
+      builder:(context, snapshot) {
+        return _isLoading ? Loading() :  Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xFFff9934),
+            title: Text(
+              snapshot.data['data']['nama'],
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+          ),
+          body: Container(
+            decoration: BoxDecoration(color: Color.fromARGB(255, 255, 242, 224)),
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: [
+                Column(children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height / 5,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(recipesAll.recipe[2].image),
+                            fit: BoxFit.cover)),
                   ),
-                ),
-              ),
-              Center(
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    child: Text(
+                      snapshot.data['data']['deskripsi'],
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
-                    child: StarRating(
-                  onRatingChanged: (rating) =>
-                      setState(() => this.rating = rating),
-                  color: Colors.orange,
-                )),
-              ),
-              inputComment()
-            ]),
-          ],
-        ),
-      ),
+                  Center(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                        child: StarRating(
+                      onRatingChanged: (rating) =>
+                          setState(() => this.rating = rating),
+                      color: Colors.orange,
+                    )),
+                  ),
+                  inputComment()
+                ]),
+              ],
+            ),
+          ),
+        );
+      }
     );
   }
 

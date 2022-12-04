@@ -43,7 +43,7 @@ class _LoginScreen extends State<Login> {
           "email": emailcontroller.text,
           "password": passwordcontroller.text,
         }));
-    print(emailcontroller);
+    // print(emailcontroller);
     print("----Login----");
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["status"] == true) {

@@ -18,45 +18,45 @@ class _ProfileState extends State<Profile> {
       children: [
         Column(
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width/1.2,
-              height: 50,
-              decoration: BoxDecoration(
-                // color: Color(0xFFff9934),
-                border: Border.all(
-                  color: Color(0xFFff9934),
-                  width: 1.4
-                  ),
-                borderRadius: BorderRadius.circular(45)
-              ),
-              child: Center(
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                        ),
+            // Container(
+            //   width: MediaQuery.of(context).size.width/1.2,
+            //   height: 50,
+            //   decoration: BoxDecoration(
+            //     // color: Color(0xFFff9934),
+            //     border: Border.all(
+            //       color: Color(0xFFff9934),
+            //       width: 1.4
+            //       ),
+            //     borderRadius: BorderRadius.circular(45)
+            //   ),
+            //   child: Center(
+            //     child: TextField(
+            //       decoration: InputDecoration(
+            //           prefixIcon: Icon(
+            //             Icons.search,
+            //             ),
                       
-                      // suffixIcon: IconButton(
-                      //   icon: Icon(Icons.clear),
-                      //   onPressed: () {
-                      //     /* Clear the search field */
-                      //   },
-                      // ),
-                      hintText: "Cari Favorit...",
-                      hintStyle: TextStyle(
-                        ),
-                      border: InputBorder.none),
-                ),
-              ),
-            ),
+            //           // suffixIcon: IconButton(
+            //           //   icon: Icon(Icons.clear),
+            //           //   onPressed: () {
+            //           //     /* Clear the search field */
+            //           //   },
+            //           // ),
+            //           hintText: "Cari Favorit...",
+            //           hintStyle: TextStyle(
+            //             ),
+            //           border: InputBorder.none),
+            //     ),
+            //   ),
+            // ),
 
-            Divider(
-              thickness: 0.5,
-              indent: MediaQuery.of(context).size.width/18,
-              endIndent: MediaQuery.of(context).size.width/18,
-              color: Color(0xFFff9934),
-              height: 40,
-            ),
+            // Divider(
+            //   thickness: 0.5,
+            //   indent: MediaQuery.of(context).size.width/18,
+            //   endIndent: MediaQuery.of(context).size.width/18,
+            //   color: Color(0xFFff9934),
+            //   height: 40,
+            // ),
 
             Container(
               child: Image.asset(
@@ -86,7 +86,7 @@ class _ProfileState extends State<Profile> {
             Container(
               width: MediaQuery.of(context).size.width/1.5,
               child: Text(
-                "Ayo Cari Resep favoritmu Sekarang juga!",
+                "Ayo Buat Resep favoritmu Sekarang juga!",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,

@@ -62,7 +62,7 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
                     height: MediaQuery.of(context).size.height / 5,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(recipesAll.recipe[2].image),
+                            image: AssetImage('assets/images/${snapshot.data['data']['gambar']}'),
                             fit: BoxFit.cover)),
                   ),
                   Container(

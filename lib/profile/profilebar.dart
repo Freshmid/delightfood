@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+import '../onboarding/login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'setprofil.dart';
+import 'package:http/http.dart' as http;
+
+
 
 class ProfileBar extends StatefulWidget {
   const ProfileBar({ Key? key }) : super(key: key);
@@ -9,8 +16,38 @@ class ProfileBar extends StatefulWidget {
 }
 
 class _ProfileBarState extends State<ProfileBar> {
-  String user_name = "NirvanaXDD";
-  String user_email = "@nirvanadd";
+  _ProfileBarState() {
+    getUser();
+  }
+  String namacontroller = "";
+  String emailcontroller = "";
+
+  void getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    final response = await http.get(Uri.parse(
+        "http://delight.foundid.my.id/api/user?id=${prefs.getInt('user_id')}"));
+    try {
+      namacontroller = jsonDecode(response.body)["data"]["nama"];
+      emailcontroller = jsonDecode(response.body)["data"]["email"];
+    } catch (e){
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      await preferences.clear();
+      goLogin();
+    } finally {
+      print("Usually Error");
+    }
+    // tanggallahircontroller.text = jsonDecode(response.body)["data"]["tanggal_lahir"];
+    // image = jsonDecode(response.body)["data"]["gambar"];
+    setState(() {});
+  }
+
+  void goLogin() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Login(),
+      ),
+    );
+  }
 
   void settingProfile() {
     Navigator.of(context).push(
@@ -55,7 +92,7 @@ class _ProfileBarState extends State<ProfileBar> {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  user_name,
+                  namacontroller,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
@@ -70,7 +107,7 @@ class _ProfileBarState extends State<ProfileBar> {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  user_email,
+                  emailcontroller,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,

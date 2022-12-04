@@ -125,7 +125,7 @@ class _RecommendedResepState extends State<RecommendedResep> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             image: DecorationImage(image: AssetImage(
-                                recipesAll.recipe[i].image), fit: BoxFit.cover)
+                                'assets/images/${snapshot.data['data'][i]['gambar']}'), fit: BoxFit.cover)
                         ),
                       ),
                     ),

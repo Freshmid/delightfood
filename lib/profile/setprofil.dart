@@ -1,10 +1,12 @@
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../base_app/base.dart';
 import 'package:http/http.dart' as http;
+import '../onboarding/login.dart';
+
 
 class Setprofile extends StatefulWidget {
   const Setprofile({Key? key}) : super(key: key);
@@ -26,11 +28,10 @@ class _setprofilScreen extends State<Setprofile> {
   void getUser() async {
     final prefs = await SharedPreferences.getInstance();
     final response = await http.get(Uri.parse(
-        "${dotenv.get('API_URL')}/user?id=${prefs.getInt('user_id')}"));
+        "http://delight.foundid.my.id/api/user?id=${prefs.getInt('user_id')}"));
     namacontroller.text = jsonDecode(response.body)["data"]["nama"];
     emailcontroller.text = jsonDecode(response.body)["data"]["email"];
-    tanggallahircontroller.text =
-        jsonDecode(response.body)["data"]["tanggal_lahir"];
+    // tanggallahircontroller.text = jsonDecode(response.body)["data"]["tanggal_lahir"];
     image = jsonDecode(response.body)["data"]["gambar"];
     setState(() {});
   }
@@ -39,14 +40,14 @@ class _setprofilScreen extends State<Setprofile> {
     final prefs = await SharedPreferences.getInstance();
     final response = await http.post(
         Uri.parse(
-            "${dotenv.get('API_URL')}/update-user/${prefs.getInt('user_id')}}"),
+            "http://delight.foundid.my.id/api/update-user/${prefs.getInt('user_id')}}"),
         headers: <String, String>{
           "Content-Type": "application/json;charset=UTF-8"
         },
         body: jsonEncode(<String, String>{
           'nama': namacontroller.text,
           'email': emailcontroller.text,
-          'tanggal_lahir': tanggallahircontroller.text
+          // 'tanggal_lahir': tanggallahircontroller.text
         }));
     if (response.statusCode == 200) {
       print(jsonDecode(response.body)["data"]);
@@ -54,6 +55,14 @@ class _setprofilScreen extends State<Setprofile> {
       print(jsonDecode(response.body)["data"]);
       throw Exception('Failed to load');
     }
+  }
+
+  void goLogin() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => Login(),
+      ),
+    );
   }
 
   void backtoBase() {
@@ -78,8 +87,8 @@ class _setprofilScreen extends State<Setprofile> {
               children: [
                 CircleAvatar(
                   radius: 50.0,
-                  backgroundImage:
-                      NetworkImage("${dotenv.get('ASSET_URL')}/user/${image}"),
+                  // backgroundImage:
+                      // NetworkImage("http://delight.foundid.my.id/api/user/${image}"),
                 )
               ],
             ),
@@ -100,14 +109,15 @@ class _setprofilScreen extends State<Setprofile> {
               height: 20,
             ),
 
-            tanggallahir(),
+            // tanggallahir(),
 
-            Container(
-              height: 20,
-            ),
+            // Container(
+            //   height: 20,
+            // ),
             // lokasi(),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
+              // padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
+              padding: EdgeInsets.fromLTRB(10, 40, 10, 10),
               child: ElevatedButton(
                   style: TextButton.styleFrom(
                     elevation: 5,
@@ -127,7 +137,32 @@ class _setprofilScreen extends State<Setprofile> {
                         fontSize: 18,
                         fontWeight: FontWeight.bold),
                   )),
-            )
+            ),
+            Container(
+              // padding: EdgeInsets.symmetric(vertical: 40, horizontal: 0),
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
+              child: ElevatedButton(
+                  style: TextButton.styleFrom(
+                    elevation: 5,
+                    padding: EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    backgroundColor: Color.fromARGB(255, 206, 206, 206),
+                  ),
+                  onPressed: () async {
+                    SharedPreferences preferences = await SharedPreferences.getInstance();
+                    await preferences.clear();
+                    goLogin();
+                    
+                  },
+                  child: Text(
+                    "Log Out",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
+            ),
           ],
         ),
       ),

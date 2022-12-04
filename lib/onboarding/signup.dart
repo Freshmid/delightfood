@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -52,6 +53,14 @@ class _SignUpScreen extends State<SignUp> {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
         print("----Complete----");
         goHome();
+      } else {
+          CoolAlert.show(
+          context: context,
+          backgroundColor: Color(0xFFff9934),
+          type: CoolAlertType.error,
+          title: 'Error',
+          text: "Data yang Dimasukkan Salah!",
+          confirmBtnText: 'Oke', confirmBtnColor: Color(0xFFff9934));
       }
     } else {
       throw Exception('Failed to load');

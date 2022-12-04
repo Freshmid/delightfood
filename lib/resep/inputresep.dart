@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,49 +16,21 @@ class InputResep extends StatefulWidget {
 }
 
 class _InputResep extends State<InputResep> {
-  // late File _image;
-  // final ImagePicker picker = ImagePicker();
-  // TextEditingController nameController = TextEditingController();
-
-
-  // Future choiceImage()async{
-  //   var pickedImage = await picker.getImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     _image = File(pickedImage!.path);
-  //   });
-  //   Uint8List imagebytes = await _image.readAsBytes(); //convert to bytes
-  //   String base64string = base64.encode(imagebytes); //convert bytes to base64 string
-  //   print(base64string); 
-  // }
   final titlecontroller = TextEditingController();
   final desccontroller = TextEditingController();
-  final ImagePicker imgpicker = ImagePicker();
-  String imagepath = "";
-  
-  openImage() async {
-    try {
-        var pickedFile = await imgpicker.pickImage(source: ImageSource.gallery);
-        //you can use ImageCourse.camera for Camera capture
-        if(pickedFile != null){
-          setState(() {
-            imagepath = pickedFile.path;
-          });
-          print(imagepath); 
-          //output /data/user/0/com.example.testapp/cache/image_picker7973898508152261600.jpg
+  final ImagePicker _picker = ImagePicker();
+  File? _imageFile;
+  String _base64 = "";
+  String format_file = "";
 
-          File imagefile = File(imagepath); //convert Path to File
-          Uint8List imagebytes = await imagefile.readAsBytes(); //convert to bytes
-          String base64string = base64.encode(imagebytes); //convert bytes to base64 string
-          print(base64string); 
-
-          Uint8List decodedbytes = base64.decode(base64string);
-          //decode base64 stirng to bytes  
-        }else{
-           print("No image is selected.");
-        }
-    }catch (e) {
-        print("error while picking file.");
-    }
+  _getFromGallery() async {
+    XFile? image = await _picker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    setState(() {
+    });
   }
 
   @override
@@ -91,10 +64,45 @@ class _InputResep extends State<InputResep> {
           "user_id": get_id.toString(),
           "nama": titlecontroller.text,
           "deskripsi": desccontroller.text,
+          "gambar": _base64,
+          "format": format_file,
         }));
     print("----Uploading Recipe----");
     if (response.statusCode == 200) {
       print("----Complete----");
+    }
+  }
+
+void _pickImageBase64() async{
+    try {
+       // pick image from gallery, change ImageSource.camera if you want to capture image from camera.
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      if (image == null) return;  
+       // read picked image byte data.
+      Uint8List imagebytes = await image!.readAsBytes();
+      // using base64 encoder convert image into base64 string.
+      String _base64String = base64.encode(imagebytes);
+      // print(_base64String);
+      
+      final imageTemp = File(image.path);
+      setState(() {
+        _imageFile = imageTemp;
+        _base64 = _base64String;   // setState to image the UI and show picked image on screen.
+      });
+      final get_format = _imageFile.toString();
+      print(get_format);
+      final split1 = get_format.split('/');
+      final split2 = split1[split1.length-1];
+      final split3 = split2.split("'");
+      
+      setState(() {
+        format_file = split3[0];
+      });
+      print(format_file);
+    }on PlatformException catch (e){
+      if (kDebugMode) {
+        print('error');
+      }
     }
   }
 
@@ -107,18 +115,19 @@ class _InputResep extends State<InputResep> {
       child: Column(
         children: [
 
-          imagepath != ""?Image.file(File(imagepath)):
-            Container( 
-              child: Text("No Image selected."),
-            ),
+          // ImagePicker() != Null?Image.file(File(ImagePicker)):
+          Container( 
+            child: Text("No Image selected."),
+          ),
 
-            //open button ----------------
-            ElevatedButton(
-              onPressed: (){
-                  openImage();
-              }, 
-              child: Text("Open Image")
-            ),
+          //open button ----------------
+          ElevatedButton(
+            onPressed: (){
+                // _getFromGallery();
+                _pickImageBase64();
+            }, 
+            child: Text("Open Image")
+          ),
         ]
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,10 +56,24 @@ class RecommendedResep extends StatefulWidget {
 
 class _RecommendedResepState extends State<RecommendedResep> {
   bool _isLoading = false;
+  int count = 0;
+  
+  _RecommendedResepState(){
+    getCount();
+  }
+
+  void getCount() async {
+    final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/resep'));
+    final data = jsonDecode(response.body);
+    setState(() {
+      count = data['data'].length;
+    });
+  }
 
   Future fetchResep() async {
     _isLoading = true;
     final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/resep'));
+
     if (response.statusCode == 200) {
       _isLoading = false;
       return jsonDecode(response.body);
@@ -102,13 +117,14 @@ class _RecommendedResepState extends State<RecommendedResep> {
       FutureBuilder(
         future: fetchResep(),
         builder:(context, snapshot) {
+          // print(snapshot);
           return _isLoading ? Loading() : Column(
             children: [
               Center(
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () => readDescription(i),
+                      onTap: () => readDescription(snapshot.data['data'][i]['id']),
                       child: Container(
                         width: double.infinity,
                         height: MediaQuery
@@ -123,11 +139,12 @@ class _RecommendedResepState extends State<RecommendedResep> {
                             .of(context)
                             .size
                             .height / 6,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(image: AssetImage(
-                                'assets/images/${snapshot.data['data'][i]['gambar']}'), fit: BoxFit.cover)
-                        ),
+                        child: Image.network('http://delight.foundid.my.id/storage/recipes/${snapshot.data['data'][i]['gambar']}',fit: BoxFit.cover)
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(8),
+                        //     image: DecorationImage(image: AssetImage(
+                        //         'assets/images/${snapshot.data['data'][i]['gambar']}'), fit: BoxFit.cover)
+                        // ),
                       ),
                     ),
                     Container(
@@ -189,7 +206,7 @@ class _RecommendedResepState extends State<RecommendedResep> {
     return GridView.builder(
         physics: ScrollPhysics(),
         shrinkWrap: true,
-        itemCount: recipesAll.recipe.length,
+        itemCount: count,
         itemBuilder: (context, i) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: components(context, i),

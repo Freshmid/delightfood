@@ -68,11 +68,7 @@ class _LoginScreen extends State<Login> {
   }
 
   void goHome() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const BaseApp(),
-      ),
-    );
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> BaseApp()));
   }
 
   void goSignUp() {

@@ -39,8 +39,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_dotenv: ^5.0.2
   shared_preferences: ^2.0.15
-  image_picker:
+  image_picker: ^0.8.6
   cool_alert: ^1.1.0
+  image_utils_class: ^2.0.0
 
 dev_dependencies:
   flutter_test:

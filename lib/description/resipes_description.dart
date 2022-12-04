@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'givestars.dart';
-import '../obj_resep.dart';
+// import '../obj_resep.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../Loading.dart';
@@ -16,6 +17,7 @@ class RecipesDescription extends StatefulWidget {
 class _RecipesDescriptionState extends State<RecipesDescription> {
   bool _isLoading = false;
   double rating = 3.5;
+  // int get_id = 0;
 
   // @override
   // Widget build(BuildContext context) {
@@ -27,7 +29,13 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
 
   Future getResep(id) async {
     _isLoading = true;
+    final prefs = await SharedPreferences.getInstance();
     final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/detail-resep?id=$id'));
+    // final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/detail-resep?id=${prefs.getInt('user_id')}'));
+    print(id);
+    // setState(() {
+    //   get_id = id;
+    // });
     if (response.statusCode == 200) {
       _isLoading = false;
       return jsonDecode(response.body);
@@ -40,7 +48,7 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getResep(widget.id+1),
+      future: getResep(widget.id),
       builder:(context, snapshot) {
         return _isLoading ? Loading() :  Scaffold(
           appBar: AppBar(
@@ -60,10 +68,11 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height / 5,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/${snapshot.data['data']['gambar']}'),
-                            fit: BoxFit.cover)),
+                    child: Image.network('http://delight.foundid.my.id/storage/recipes/${snapshot.data['data']['gambar']}',fit: BoxFit.cover)
+                    // decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //         image: AssetImage('assets/images/${snapshot.data['data']['gambar']}'),
+                    //         fit: BoxFit.cover)),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),

@@ -52,7 +52,7 @@ class _SignUpScreen extends State<SignUp> {
       if (jsonDecode(response.body)["status"] == true) {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
         print("----Complete----");
-        goHome();
+        goLogin();
       } else {
           CoolAlert.show(
           context: context,

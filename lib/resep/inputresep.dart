@@ -55,6 +55,13 @@ class _InputResep extends State<InputResep> {
     final get_id = prefs.getInt('user_id');
     print("----Sending Request----");
     print(get_id.toString());
+    CoolAlert.show(
+    context: context,
+    backgroundColor: Color(0xFFff9934),
+    type: CoolAlertType.loading,
+    title: 'Loading',
+    text: "Sedang Mengupload Resep");
+    print("----Uploading Recipe----");
     final response = await http.post(
       // Uri.parse("${dotenv.get('API_URL')}/register"),
         Uri.parse('http://delight.foundid.my.id/api/up-resep'),
@@ -68,13 +75,6 @@ class _InputResep extends State<InputResep> {
           "gambar": _base64,
           "format": format_file,
         }));
-          CoolAlert.show(
-    context: context,
-    backgroundColor: Color(0xFFff9934),
-    type: CoolAlertType.loading,
-    title: 'Loading',
-    text: "Sedang Mengupload Resep",);
-    print("----Uploading Recipe----");
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)["status"] == true) {
         await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);

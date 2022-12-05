@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'search_builder.dart';
+import 'package:http/http.dart' as http; 
 
 class Kategori extends StatefulWidget {
   const Kategori({Key? key}) : super(key: key);
@@ -10,6 +13,22 @@ class Kategori extends StatefulWidget {
 }
 
 class _KategoriScreen extends State<Kategori> {
+  bool _isLoading = false;
+  int count = 0;
+  
+  _RecommendedResepState(){
+    getCount();
+  }
+
+  void getCount() async {
+    final response = await http.get(Uri.parse('http://delight.foundid.my.id/api/resep'));
+    final data = jsonDecode(response.body);
+    setState(() {
+      count = data['data'].length;
+    });
+    print(count);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

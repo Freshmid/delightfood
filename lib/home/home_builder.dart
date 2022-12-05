@@ -68,6 +68,7 @@ class _RecommendedResepState extends State<RecommendedResep> {
     setState(() {
       count = data['data'].length;
     });
+    print(count);
   }
 
   Future fetchResep() async {
@@ -139,7 +140,10 @@ class _RecommendedResepState extends State<RecommendedResep> {
                             .of(context)
                             .size
                             .height / 6,
-                        child: Image.network('http://delight.foundid.my.id/storage/recipes/${snapshot.data['data'][i]['gambar']}',fit: BoxFit.cover)
+                        child: Container(
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                          child: Image.network('http://delight.foundid.my.id/storage/recipes/${snapshot.data['data'][i]['gambar']}',fit: BoxFit.cover)                        
+                        ),
                         // decoration: BoxDecoration(
                         //     borderRadius: BorderRadius.circular(8),
                         //     image: DecorationImage(image: AssetImage(

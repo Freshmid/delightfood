@@ -50,6 +50,7 @@ class _RecipesDescriptionState extends State<RecipesDescription> {
     return FutureBuilder(
       future: getResep(widget.id),
       builder:(context, snapshot) {
+        // print(snapshot.data['data']);
         return _isLoading ? Loading() :  Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xFFff9934),

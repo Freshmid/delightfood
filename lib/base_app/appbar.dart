@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../search/search.dart';
 
 class BaseAppBar extends StatefulWidget {
   const BaseAppBar({ Key? key }) : super(key: key);
@@ -8,6 +9,15 @@ class BaseAppBar extends StatefulWidget {
 }
 
 class _BaseAppBarState extends State<BaseAppBar> {
+  void goSearch() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SearchPage(),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,20 +29,31 @@ class _BaseAppBarState extends State<BaseAppBar> {
           decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(45)
           ),
-          child: Center(
-            child: TextField(
-              decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () {
-                      /* Clear the search field */
-                    },
-                  ),
-                  hintText: "Cari Resep...",
-                  border: InputBorder.none),
+          
+          child: Container(
+            width: MediaQuery.of(context).size.width/3 - 35,
+            child: IconButton(
+              alignment: Alignment.centerLeft,
+              icon: const Icon(Icons.search),
+              iconSize: 35,
+              color: Colors.black,
+              onPressed: () {goSearch();},
             ),
           ),
+          // child: Center(
+          //   child: TextField(
+          //     decoration: InputDecoration(
+          //         prefixIcon: const Icon(Icons.search),
+          //         suffixIcon: IconButton(
+          //           icon: const Icon(Icons.clear),
+          //           onPressed: () {
+          //             // 
+          //           },
+          //         ),
+          //         hintText: "Cari Resep...",
+          //         border: InputBorder.none),
+          //   ),
+          // ),
         ),
         Container(
           width: (MediaQuery.of(context).size.width/30),

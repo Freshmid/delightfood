@@ -26,7 +26,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         ),
         child: ElevatedButton(
           onPressed: () {
-            searchCategory();
+            // searchCategory();
           },
           style: ElevatedButton.styleFrom(foregroundColor: Colors.white, backgroundColor: Color(0)),
           child: Text(recipesAll.recipe[i].category, style: TextStyle(fontSize: 24),),

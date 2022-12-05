@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -67,9 +68,33 @@ class _InputResep extends State<InputResep> {
           "gambar": _base64,
           "format": format_file,
         }));
+          CoolAlert.show(
+    context: context,
+    backgroundColor: Color(0xFFff9934),
+    type: CoolAlertType.loading,
+    title: 'Loading',
+    text: "Sedang Mengupload Resep",);
     print("----Uploading Recipe----");
     if (response.statusCode == 200) {
-      print("----Complete----");
+      if (jsonDecode(response.body)["status"] == true) {
+        await prefs.setInt('user_id', jsonDecode(response.body)["data"]["id"]);
+        CoolAlert.show(
+        context: context,
+        backgroundColor: Color(0xFFff9934),
+        type: CoolAlertType.success,
+        title: 'Berhasil',
+        text: "Resep Berhasil Ditambahkan!",
+        confirmBtnText: 'Oke', confirmBtnColor: Color(0xFFff9934));
+        print("----Complete----");
+      } else {
+        CoolAlert.show(
+        context: context,
+        backgroundColor: Color(0xFFff9934),
+        type: CoolAlertType.error,
+        title: 'Gagal',
+        text: "Resep Gagal Ditambahkan!",
+        confirmBtnText: 'Oke', confirmBtnColor: Color(0xFFff9934));
+      }
     }
   }
 

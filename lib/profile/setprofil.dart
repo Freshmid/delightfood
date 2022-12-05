@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,6 +52,13 @@ class _setprofilScreen extends State<Setprofile> {
         }));
     if (response.statusCode == 200) {
       print(jsonDecode(response.body)["data"]);
+      CoolAlert.show(
+      context: context,
+      backgroundColor: Color(0xFFff9934),
+      type: CoolAlertType.success,
+      title: 'Berhasil',
+      text: "Profile Berhasil Diubah",
+      confirmBtnText: 'Oke', confirmBtnColor: Color(0xFFff9934));
     } else {
       print(jsonDecode(response.body)["data"]);
       throw Exception('Failed to load');
